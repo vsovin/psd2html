@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Заявка на комплектацию — VirshkeTech</title>
+<meta name="description" content="Форма заявки на ТФО-160 и модули автоматизации. Комплектация из калькулятора подставляется автоматически.">
+<link rel="icon" href="/assets/img/placeholder.svg">
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body data-page="order">
+
+<a class="skip-link" href="#main">Перейти к содержимому</a>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="/" aria-label="VirshkeTech — на главную">
+      <span class="logo-mark" aria-hidden="true">VT</span>
+      <span class="logo-text" data-bind="site.company">VirshkeTech</span>
+    </a>
+    <nav class="main-nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/">Главная</a>
+      <a href="/products.html">Изделия</a>
+      <a href="/product-tfo-160.html">ТФО-160</a>
+      <a href="/calculator.html">Калькулятор</a>
+      <a href="/order.html" aria-current="page">Заявка</a>
+      <a href="/contacts.html">Контакты</a>
+    </nav>
+    <div class="header-actions">
+      <a class="header-phone" href="#" data-bind-href="tel:site.phoneRaw" data-bind="site.phone">+7 (000) 000-00-00</a>
+      <button class="burger" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Открыть меню">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="page-head">
+    <div class="container">
+      <p class="eyebrow">Обратная связь</p>
+      <h1 data-bind="pages.order.title">Заявка на комплектацию</h1>
+      <p class="lead" data-bind="pages.order.subtitle">Заполните форму — свяжемся в течение рабочего дня.</p>
+    </div>
+  </section>
+
+  <section class="section section-tight">
+    <div class="container order-layout">
+
+      <!-- ФОРМА -->
+      <form class="order-form card" id="order-form" novalidate>
+        <div class="form-error alert alert-danger" id="form-error" role="alert" hidden></div>
+
+        <div class="form-row form-row-2">
+          <div class="field">
+            <label for="f-name">Имя <span class="req" aria-hidden="true">*</span></label>
+            <input type="text" id="f-name" name="name" maxlength="120" required
+                   autocomplete="name" placeholder="Как к вам обращаться"
+                   aria-describedby="e-name">
+            <p class="field-error" id="e-name"></p>
+          </div>
+          <div class="field">
+            <label for="f-company">Компания</label>
+            <input type="text" id="f-company" name="company" maxlength="160"
+                   autocomplete="organization" placeholder="ООО «Пример»">
+          </div>
+        </div>
+
+        <div class="form-row form-row-2">
+          <div class="field">
+            <label for="f-phone">Телефон <span class="req" aria-hidden="true">*</span></label>
+            <input type="tel" id="f-phone" name="phone" inputmode="tel" maxlength="18" required
+                   autocomplete="tel" placeholder="+7 (___) ___-__-__"
+                   aria-describedby="h-phone e-phone">
+            <p class="field-hint" id="h-phone">Формат подставляется автоматически.</p>
+            <p class="field-error" id="e-phone"></p>
+          </div>
+          <div class="field">
+            <label for="f-email">E-mail</label>
+            <input type="email" id="f-email" name="email" maxlength="120"
+                   autocomplete="email" placeholder="you@company.ru"
+                   aria-describedby="e-email">
+            <p class="field-error" id="e-email"></p>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="f-machine">Модель станка</label>
+          <textarea id="f-machine" name="machine" rows="3" maxlength="1000"
+                    placeholder="Производитель, модель, стойка ЧПУ, размер стола"
+                    aria-describedby="h-machine"></textarea>
+          <p class="field-hint" id="h-machine" data-bind="pages.order.note">
+            Укажите модель и стойку — подготовим ответ заранее.
+          </p>
+        </div>
+
+        <!-- Конфигурация из калькулятора: видна, но не редактируется вручную -->
+        <div class="config-box" id="config-box" hidden>
+          <div class="config-head">
+            <h2 class="config-title">Выбранная комплектация</h2>
+            <button type="button" class="link-reset" id="clear-config" aria-label="Сбросить комплектацию из калькулятора">сбросить</button>
+          </div>
+          <ul class="summary-list" id="order-config-list"></ul>
+          <div class="summary-total summary-total-sm">
+            <span>Итого по прайсу</span>
+            <span class="total-value" id="order-total" aria-live="polite">0 ₽</span>
+          </div>
+        </div>
+        <p class="config-empty" id="config-empty">
+          Комплектация не выбрана — <a href="/calculator.html">соберите её в калькуляторе</a> или оставьте заявку без расчёта.
+        </p>
+
+        <!-- Скрытые поля: сервер пересчитывает сумму по своим ценам -->
+        <input type="hidden" name="config" id="f-config" value="">
+        <input type="hidden" name="total" id="f-total" value="0">
+        <input type="hidden" name="base" id="f-base" value="">
+        <input type="hidden" name="modules" id="f-modules" value="">
+        <input type="hidden" name="source" id="f-source" value="order-page">
+
+        <div class="field field-consent">
+          <label class="checkbox-line">
+            <input type="checkbox" id="f-consent" name="consent" required aria-describedby="e-consent">
+            <span data-bind="pages.order.agreeText">Согласен(на) на обработку персональных данных</span>
+            <span class="req" aria-hidden="true">*</span>
+          </label>
+          <p class="field-error" id="e-consent"></p>
+        </div>
+
+        <button class="btn btn-primary btn-lg btn-block" type="submit" id="submit-btn">Отправить заявку</button>
+        <p class="form-note">Нажимая кнопку, вы отправляете данные формы на наш сервер. Рекламируемые цены не являются публичной офертой.</p>
+      </form>
+
+      <!-- БОКОВАЯ ИНФО-КОЛОНКА -->
+      <aside class="order-aside">
+        <div class="card aside-card">
+          <h2 class="aside-title">Как пройдёт обработка</h2>
+          <ol class="steps-list">
+            <li>Проверим заявку и уточним посадочные места.</li>
+            <li>Пришлём чертёж и схему подключения.</li>
+            <li>Согласуем срок изготовления и оплату.</li>
+          </ol>
+        </div>
+        <div class="card aside-card">
+          <h2 class="aside-title">Быстрая связь</h2>
+          <p><a href="#" data-bind-href="tel:site.phoneRaw" data-bind="site.phone">+7 (000) 000-00-00</a></p>
+          <p><a href="#" data-bind-href="mailto:site.email" data-bind="site.email">info@virshketech.com</a></p>
+          <p class="muted" data-bind="site.workHours">Пн–Пт 09:00–18:00</p>
+        </div>
+      </aside>
+
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-col">
+      <a class="logo" href="/"><span class="logo-mark" aria-hidden="true">VT</span><span class="logo-text" data-bind="site.company">VirshkeTech</span></a>
+      <p class="footer-about" data-bind="site.tagline">Оснастка и модули автоматизации для токарных и фрезерных станков.</p>
+    </div>
+    <nav class="footer-col" aria-label="Разделы сайта">
+      <a href="/products.html">Изделия</a>
+      <a href="/product-tfo-160.html">ТФО-160</a>
+      <a href="/calculator.html">Калькулятор</a>
+      <a href="/order.html">Заявка</a>
+      <a href="/contacts.html">Контакты</a>
+    </nav>
+    <div class="footer-col footer-contacts">
+      <a href="#" data-bind-href="tel:site.phoneRaw" data-bind="site.phone">+7 (000) 000-00-00</a>
+      <a href="#" data-bind-href="mailto:site.email" data-bind="site.email">info@virshketech.com</a>
+      <p data-bind="site.address">Адрес производства</p>
+      <p data-bind="site.workHours">Пн–Пт 09:00–18:00</p>
+      <p class="footer-social">
+        <a href="#" data-bind-href="site.social.telegram" target="_blank" rel="noopener noreferrer">Telegram</a>
+        <a href="#" data-bind-href="site.social.whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+      </p>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span data-bind="site.footerNote">© VirshkeTech</span>
+    <span data-bind="site.inn">[ИНН/ОГРН]</span>
+    <a href="/admin.html" class="footer-admin" aria-label="Мини-CMS для редактирования контента">CMS</a>
+  </div>
+</footer>
+
+<script src="/assets/script.js"></script>
+</body>
+</html>

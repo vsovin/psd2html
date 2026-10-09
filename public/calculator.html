@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Калькулятор комплектации — VirshkeTech</title>
+<meta name="description" content="Выберите базу подключения и модули автоматизации ТФО-160 — стоимость пересчитается мгновенно.">
+<link rel="icon" href="/assets/img/placeholder.svg">
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body data-page="calculator">
+
+<a class="skip-link" href="#main">Перейти к содержимому</a>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="/" aria-label="VirshkeTech — на главную">
+      <span class="logo-mark" aria-hidden="true">VT</span>
+      <span class="logo-text" data-bind="site.company">VirshkeTech</span>
+    </a>
+    <nav class="main-nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/">Главная</a>
+      <a href="/products.html">Изделия</a>
+      <a href="/product-tfo-160.html">ТФО-160</a>
+      <a href="/calculator.html" aria-current="page">Калькулятор</a>
+      <a href="/order.html">Заявка</a>
+      <a href="/contacts.html">Контакты</a>
+    </nav>
+    <div class="header-actions">
+      <a class="header-phone" href="#" data-bind-href="tel:site.phoneRaw" data-bind="site.phone">+7 (000) 000-00-00</a>
+      <button class="burger" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Открыть меню">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="page-head">
+    <div class="container">
+      <p class="eyebrow">Онлайн-расчёт</p>
+      <h1 data-bind="calculator.title">Калькулятор комплектации ТФО-160</h1>
+      <p class="lead" data-bind="calculator.subtitle">Шаг 1 — база подключения. Шаг 2 — модули автоматизации. Итог считается мгновенно.</p>
+    </div>
+  </section>
+
+  <section class="section section-tight">
+    <div class="container calc-layout">
+
+      <!-- ШАГ 1 + ШАГ 2 -->
+      <form class="calc-form" id="calc-form" novalidate aria-label="Параметры комплектации">
+
+        <fieldset class="calc-block">
+          <legend>
+            <span class="step-badge" aria-hidden="true">1</span>
+            <span data-bind="calculator.baseTitle">База подключения</span>
+            <span class="hint">обязательно, один вариант</span>
+          </legend>
+          <div class="option-list" id="base-options" role="radiogroup" aria-label="База подключения"><!-- radio из calculator.baseOptions --></div>
+          <p class="field-error" id="base-error" role="alert" hidden data-bind="calculator.noBaseError">Выберите один из вариантов базы.</p>
+        </fieldset>
+
+        <fieldset class="calc-block">
+          <legend>
+            <span class="step-badge" aria-hidden="true">2</span>
+            <span data-bind="calculator.modulesTitle">Модули автоматизации</span>
+            <span class="hint">можно несколько</span>
+          </legend>
+          <div class="option-list" id="module-options"><!-- checkbox из calculator.modules --></div>
+        </fieldset>
+
+        <p class="calc-note" data-bind="calculator.orderNote">
+          Цены ориентировочные: итоговая стоимость зависит от посадочных мест вашего станка.
+        </p>
+      </form>
+
+      <!-- ИТОГО -->
+      <aside class="calc-summary" aria-label="Итог расчёта">
+        <div class="summary-sticky">
+          <h2 class="summary-title">Ваша комплектация</h2>
+
+          <ul class="summary-list" id="summary-list">
+            <li class="summary-empty" id="summary-empty" data-bind="calculator.summaryEmpty">Пока ничего не выбрано — отметьте базу слева.</li>
+          </ul>
+
+          <div class="summary-total">
+            <span class="total-label" data-bind="calculator.totalLabel">Итого</span>
+            <span class="total-value" id="total-value" aria-live="polite">0 ₽</span>
+          </div>
+
+          <button class="btn btn-primary btn-block" type="button" id="to-order-btn" data-bind="calculator.toOrderLabel">Оформить заказ</button>
+          <button class="btn btn-ghost btn-block" type="button" id="calc-reset-btn" data-bind="calculator.resetLabel">Сбросить выбор</button>
+
+          <p class="summary-legal">Нажатие «Оформить заказ» переносит выбранную комплектацию в форму заявки — сумма там пересчитывается по тем же ценам.</p>
+        </div>
+      </aside>
+
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container cta-inner">
+      <div>
+        <h2 data-bind="pages.home.ctaTitle">Нужна консультация технолога?</h2>
+        <p data-bind="pages.home.ctaText">Опишите задачу и модель станка.</p>
+      </div>
+      <a class="btn btn-primary btn-lg" href="/products.html">Смотреть изделия</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-col">
+      <a class="logo" href="/"><span class="logo-mark" aria-hidden="true">VT</span><span class="logo-text" data-bind="site.company">VirshkeTech</span></a>
+      <p class="footer-about" data-bind="site.tagline">Оснастка и модули автоматизации для токарных и фрезерных станков.</p>
+    </div>
+    <nav class="footer-col" aria-label="Разделы сайта">
+      <a href="/products.html">Изделия</a>
+      <a href="/product-tfo-160.html">ТФО-160</a>
+      <a href="/calculator.html">Калькулятор</a>
+      <a href="/order.html">Заявка</a>
+      <a href="/contacts.html">Контакты</a>
+    </nav>
+    <div class="footer-col footer-contacts">
+      <a href="#" data-bind-href="tel:site.phoneRaw" data-bind="site.phone">+7 (000) 000-00-00</a>
+      <a href="#" data-bind-href="mailto:site.email" data-bind="site.email">info@virshketech.com</a>
+      <p data-bind="site.address">Адрес производства</p>
+      <p data-bind="site.workHours">Пн–Пт 09:00–18:00</p>
+      <p class="footer-social">
+        <a href="#" data-bind-href="site.social.telegram" target="_blank" rel="noopener noreferrer">Telegram</a>
+        <a href="#" data-bind-href="site.social.whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+      </p>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span data-bind="site.footerNote">© VirshkeTech</span>
+    <span data-bind="site.inn">[ИНН/ОГРН]</span>
+    <a href="/admin.html" class="footer-admin" aria-label="Мини-CMS для редактирования контента">CMS</a>
+  </div>
+</footer>
+
+<script src="/assets/script.js"></script>
+</body>
+</html>
