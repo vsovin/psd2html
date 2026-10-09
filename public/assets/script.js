@@ -320,6 +320,16 @@
       var moduleId = document.body.dataset.moduleId;
       if (moduleId) addBtn.href = '/calculator.html?add=' + encodeURIComponent(moduleId);
     }
+
+    // Блок «Другие изделия»: показываем всё, кроме текущего изделия
+    var otherHost = $('#other-products');
+    if (otherHost && pageKey) {
+      otherHost.textContent = '';
+      (data.products || [])
+        .filter(function (p) { return p.id !== pageKey; })
+        .slice(0, 4)
+        .forEach(function (p) { otherHost.appendChild(productCard(p, data)); });
+    }
   }
 
   /* --------------------------------------------------------------------- */
@@ -458,6 +468,14 @@
       var cfg = selection.base + (selection.modules.length ? '+' + selection.modules.join(',') : '');
       location.href = '/order.html?cfg=' + encodeURIComponent(cfg);
     });
+
+    var resetBtn = $('#calc-reset-btn');
+    if (resetBtn) {
+      resetBtn.addEventListener('click', function () {
+        $$('input[type="radio"], input[type="checkbox"]', form).forEach(function (i) { i.checked = false; });
+        update();
+      });
+    }
   }
 
   /* --------------------------------------------------------------------- */
@@ -711,7 +729,27 @@
   }
 
   /* --------------------------------------------------------------------- */
-  /* 5. Прочее: меню, страница «Спасибо»                                    */
+  /* 5. Прочее: реквизиты, меню, страница «Спасибо»                          */
+  /* --------------------------------------------------------------------- */
+
+  /** Реквизиты на странице контактов: pages.contacts.requisites = [{label, value}] */
+  function renderRequisites(data) {
+    var host = $('#requisites-list');
+    if (!host) return;
+    var list = getPath(data, 'pages.contacts.requisites') || [];
+    host.textContent = '';
+    if (!list.length) {
+      host.appendChild(el('p', 'empty-note', '[РЕКВИЗИТЫ] — данные ещё не внесены.'));
+      return;
+    }
+    list.forEach(function (row) {
+      var item = el('div', 'req-row');
+      item.appendChild(el('span', 'req-label', row.label || ''));
+      item.appendChild(el('span', 'req-value', row.value || ''));
+      host.appendChild(item);
+    });
+  }
+
   /* --------------------------------------------------------------------- */
 
   function initBurger() {
@@ -772,6 +810,7 @@
         renderCalcTeaser(DATA);
         renderCatalog(DATA);
         renderProductPage(DATA);
+        renderRequisites(DATA);
         initCalculator(DATA);
         initOrderForm(DATA);
         initThanks(DATA);

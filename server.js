@@ -141,12 +141,19 @@ const cleanLine = (v, max = 300) => String(v == null ? '' : v).replace(/\s+/g, '
 const URL_KEYS = new Set(['image', 'page', 'heroImage', 'iconUrl', 'logo', 'href', 'link', 'url', 'ctaLink']);
 const looksLikeUrlKey = (key) => /(^|_)(url|image|img|link|href|logo)$/i.test(key) || /(url|image|img|link|href|social)/i.test(key);
 
-/** Схема ссылки недопустима, если не https/http/относительная (запрет javascript:, data:, vbscript:) */
+/** Признак «это URL», а не обычный текст: tel:/mailto: тоже считаем ссылками */
+const looksLikeUrlValue = (s) => /^(https?:|tel:|mailto:|\/\/)/i.test(String(s || '').trim());
+
+/**
+ * Схема ссылки недопустима, если не http(s) / mailto / tel / относительная.
+ * Запрещаем javascript:, data:, vbscript: и прочую исполняющую схему.
+ * Обычный текст (телефон «+7 …», адрес, ФИО) схемой не является — пропускаем как есть.
+ */
 const isSafeScheme = (s) => {
   const t = String(s || '').trim();
   if (!t) return true;
-  if (t.startsWith('/')) return true;
-  return /^https?:\/\//i.test(t);
+  if (!looksLikeUrlValue(t)) return true;
+  return /^(https?:\/\/|mailto:|tel:)/i.test(t);
 };
 
 /**
@@ -156,10 +163,19 @@ const isSafeScheme = (s) => {
  */
 function sanitizeScalar(value, key, max = 4000) {
   const s = value == null ? '' : String(value);
-  const isUrlField = URL_KEYS.has(key) || looksLikeUrlKey(key);
+  const isUrlField = URL_KEYS.has(key) || looksLikeUrlKey(key) || looksLikeUrlValue(s);
   if (isUrlField && !isSafeScheme(s)) return ''; // dangerous scheme -> drop
   if (isUrlField) return cleanLine(s, 500);
   return max <= 500 ? cleanLine(s, max) : cleanText(s, max);
+}
+
+/**
+ * Слияние с сохранением полей, которые CMS не отдаёт (например, products[].url —
+ * они не редактируются из админки и должны пережить любое сохранение).
+ */
+function mergeById(previous = [], incoming = []) {
+  const prev = new Map((previous || []).map((x) => [String(x.id), x]));
+  return (incoming || []).map((item) => ({ ...(prev.get(String(item.id)) || {}), ...item }));
 }
 
 function sanitizeSite(site) {

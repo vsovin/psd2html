@@ -58,7 +58,7 @@
             <span class="hint">обязательно, один вариант</span>
           </legend>
           <div class="option-list" id="base-options" role="radiogroup" aria-label="База подключения"><!-- radio из calculator.baseOptions --></div>
-          <p class="field-error" id="base-error" role="alert" hidden>Выберите один из вариантов базы.</p>
+          <p class="field-error" id="base-error" role="alert" hidden data-bind="calculator.noBaseError">Выберите один из вариантов базы.</p>
         </fieldset>
 
         <fieldset class="calc-block">
@@ -70,9 +70,8 @@
           <div class="option-list" id="module-options"><!-- checkbox из calculator.modules --></div>
         </fieldset>
 
-        <p class="calc-note">
+        <p class="calc-note" data-bind="calculator.orderNote">
           Цены ориентировочные: итоговая стоимость зависит от посадочных мест вашего станка.
-          Точную цену подтвердит инженер после уточнения модели.
         </p>
       </form>
 
@@ -82,7 +81,7 @@
           <h2 class="summary-title">Ваша комплектация</h2>
 
           <ul class="summary-list" id="summary-list">
-            <li class="summary-empty" id="summary-empty">Пока ничего не выбрано — отметьте базу слева.</li>
+            <li class="summary-empty" id="summary-empty" data-bind="calculator.summaryEmpty">Пока ничего не выбрано — отметьте базу слева.</li>
           </ul>
 
           <div class="summary-total">
@@ -90,8 +89,8 @@
             <span class="total-value" id="total-value" aria-live="polite">0 ₽</span>
           </div>
 
-          <button class="btn btn-primary btn-block" type="button" id="to-order-btn">Оформить заказ</button>
-          <a class="btn btn-ghost btn-block" href="/order.html">Заявка без расчёта</a>
+          <button class="btn btn-primary btn-block" type="button" id="to-order-btn" data-bind="calculator.toOrderLabel">Оформить заказ</button>
+          <button class="btn btn-ghost btn-block" type="button" id="calc-reset-btn" data-bind="calculator.resetLabel">Сбросить выбор</button>
 
           <p class="summary-legal">Нажатие «Оформить заказ» переносит выбранную комплектацию в форму заявки — сумма там пересчитывается по тем же ценам.</p>
         </div>

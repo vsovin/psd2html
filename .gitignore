@@ -1,1 +1,5 @@
-(empty)
+# Environment files
+.env
+
+# Backup files
+*.bak
