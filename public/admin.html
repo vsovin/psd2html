@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Мини-CMS — VirshkeTech</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Панель управления контентом сайта: контакты, тексты, цены калькулятора, заявки.">
+<link rel="icon" href="/assets/img/placeholder.svg">
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body data-page="admin" class="admin-body">
+
+<a class="skip-link" href="#main">Перейти к содержимому</a>
+
+<header class="site-header admin-header">
+  <div class="container header-inner">
+    <a class="logo" href="/" aria-label="VirshkeTech — на главную">
+      <span class="logo-mark" aria-hidden="true">VT</span>
+      <span class="logo-text">VirshkeTech <span class="logo-sub">CMS</span></span>
+    </a>
+    <div class="header-actions admin-header-actions">
+      <a class="btn btn-ghost btn-sm" href="/" target="_blank" rel="noopener noreferrer">Открыть сайт ↗</a>
+      <button class="btn btn-ghost btn-sm" type="button" id="logout-btn" hidden>Выйти</button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ЭКРАН ЛОГИНА -->
+  <section class="section section-tight" id="login-screen">
+    <div class="container narrow">
+      <div class="card login-card">
+        <h1>Вход в мини-CMS</h1>
+        <p class="muted">Пароль задаётся владельцем сервера в файле <code>.env</code> (<code>ADMIN_PASSWORD</code>).</p>
+        <div class="alert alert-danger" id="login-error" role="alert" hidden></div>
+        <form id="login-form" novalidate>
+          <div class="field">
+            <label for="login-pass">Пароль администратора</label>
+            <input type="password" id="login-pass" name="password" autocomplete="current-password"
+                   required placeholder="••••••••" aria-describedby="login-error">
+          </div>
+          <button class="btn btn-primary btn-block" type="submit" id="login-btn">Войти</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- РАБОЧАЯ ОБЛАСТЬ -->
+  <section class="section section-tight" id="admin-screen" hidden>
+    <div class="container">
+
+      <div class="admin-topbar">
+        <h1 class="admin-title">Управление контентом</h1>
+        <div class="admin-topbar-actions">
+          <span class="save-state muted" id="save-state" role="status" aria-live="polite"></span>
+          <button class="btn btn-ghost btn-sm" type="button" id="reload-btn">Отменить несохранённое</button>
+          <button class="btn btn-primary btn-sm" type="button" id="save-btn">Сохранить всё</button>
+        </div>
+      </div>
+
+      <div class="alert alert-danger" id="global-error" role="alert" hidden></div>
+      <div class="alert alert-success" id="global-ok" role="status" hidden></div>
+
+      <nav class="tabs" aria-label="Разделы админки">
+        <button class="tab is-active" type="button" role="tab" aria-selected="true" aria-controls="tab-contacts" id="t-contacts" data-tab="contacts">Контакты</button>
+        <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="tab-pages" id="t-pages" data-tab="pages" tabindex="-1">Тексты</button>
+        <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="tab-calc" id="t-calc" data-tab="calc" tabindex="-1">Калькулятор</button>
+        <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="tab-products" id="t-products" data-tab="products" tabindex="-1">Изделия</button>
+        <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="tab-orders" id="t-orders" data-tab="orders" tabindex="-1">Заявки <span class="tab-badge" id="orders-badge" hidden>0</span></button>
+      </nav>
+
+      <!-- ================= КОНТАКТЫ ================= -->
+      <div class="tab-panel" id="tab-contacts" role="tabpanel" aria-labelledby="t-contacts">
+        <div class="card panel-card">
+          <h2 class="panel-title">Контактные данные сайта</h2>
+          <p class="panel-note">Эти значения показываются в шапке, подвале и на странице «Контакты».</p>
+          <div class="admin-grid" id="site-fields"><!-- поля генерируются из schema --></div>
+        </div>
+      </div>
+
+      <!-- ================= ТЕКСТЫ ================= -->
+      <div class="tab-panel" id="tab-pages" role="tabpanel" aria-labelledby="t-pages" hidden>
+        <div class="card panel-card">
+          <h2 class="panel-title">Тексты страниц</h2>
+          <p class="panel-note">
+            Короткие поля — одна строка; длинные (описания, преимущества) — многострочные.
+            Массивы редактируются построчно: каждая строка = один элемент массива, пустые строки игнорируются.
+          </p>
+          <div class="field field-wide">
+            <label for="page-select">Страница</label>
+            <select id="page-select"></select>
+          </div>
+          <div class="admin-grid" id="page-fields"><!-- поля выбранной страницы --></div>
+        </div>
+      </div>
+
+      <!-- ================= КАЛЬКУЛЯТОР ================= -->
+      <div class="tab-panel" id="tab-calc" role="tabpanel" aria-labelledby="t-calc" hidden>
+
+        <div class="card panel-card">
+          <h2 class="panel-title">Надписи калькулятора</h2>
+          <div class="admin-grid" id="calc-text-fields"></div>
+        </div>
+
+        <div class="card panel-card">
+          <div class="panel-head">
+            <h2 class="panel-title">Базы подключения</h2>
+            <button class="btn btn-ghost btn-sm" type="button" data-add="base">+ Добавить базу</button>
+          </div>
+          <div class="table-wrap">
+            <table class="admin-table" id="bases-table">
+              <caption class="sr-only">Список баз комплектации: название, подсказка, цена, активность</caption>
+              <thead>
+                <tr>
+                  <th scope="col">id</th>
+                  <th scope="col">Название</th>
+                  <th scope="col">Подсказка</th>
+                  <th scope="col" class="col-num">Цена, ₽</th>
+                  <th scope="col" class="col-check">Активен</th>
+                  <th scope="col" class="col-del"><span class="sr-only">Действия</span></th>
+                </tr>
+              </thead>
+              <tbody id="bases-body"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card panel-card">
+          <div class="panel-head">
+            <h2 class="panel-title">Модули автоматизации</h2>
+            <button class="btn btn-ghost btn-sm" type="button" data-add="module">+ Добавить модуль</button>
+          </div>
+          <div class="table-wrap">
+            <table class="admin-table" id="modules-table">
+              <caption class="sr-only">Список модулей: название, подсказка, цена, активность</caption>
+              <thead>
+                <tr>
+                  <th scope="col">id</th>
+                  <th scope="col">Название</th>
+                  <th scope="col">Подсказка</th>
+                  <th scope="col" class="col-num">Цена, ₽</th>
+                  <th scope="col" class="col-check">Активен</th>
+                  <th scope="col" class="col-del"><span class="sr-only">Действия</span></th>
+                </tr>
+              </thead>
+              <tbody id="modules-body"></tbody>
+            </table>
+          </div>
+          <p class="panel-note">Отключённый модуль исчезает с сайта, но остаётся в базе — так можно временно снять позицию с продажи.</p>
+        </div>
+      </div>
+
+      <!-- ================= ИЗДЕЛИЯ ================= -->
+      <div class="tab-panel" id="tab-products" role="tabpanel" aria-labelledby="t-products" hidden>
+        <div class="card panel-card">
+          <div class="panel-head">
+            <h2 class="panel-title">Карточки каталога</h2>
+            <button class="btn btn-ghost btn-sm" type="button" id="add-product">+ Добавить изделие</button>
+          </div>
+          <div class="table-wrap">
+            <table class="admin-table" id="products-table">
+              <caption class="sr-only">Изделия каталога: название, категория, цена, ссылка на страницу, картинка</caption>
+              <thead>
+                <tr>
+                  <th scope="col">id</th>
+                  <th scope="col">Название</th>
+                  <th scope="col">Краткое описание</th>
+                  <th scope="col">Категория</th>
+                  <th scope="col" class="col-num">Цена, ₽</th>
+                  <th scope="col">URL страницы</th>
+                  <th scope="col">Картинка</th>
+                  <th scope="col" class="col-check">На главной</th>
+                  <th scope="col" class="col-del"><span class="sr-only">Действия</span></th>
+                </tr>
+              </thead>
+              <tbody id="products-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= ЗАЯВКИ ================= -->
+      <div class="tab-panel" id="tab-orders" role="tabpanel" aria-labelledby="t-orders" hidden>
+        <div class="card panel-card">
+          <div class="panel-head">
+            <h2 class="panel-title">Заявки с формы</h2>
+            <div class="panel-tools">
+              <label class="sr-only" for="orders-filter">Фильтр по статусу</label>
+              <select id="orders-filter">
+                <option value="all">Все статусы</option>
+                <option value="new">Новые</option>
+                <option value="in_progress">В работе</option>
+                <option value="done">Завершены</option>
+                <option value="archived">Архив</option>
+              </select>
+              <button class="btn btn-ghost btn-sm" type="button" id="refresh-orders">Обновить</button>
+              <a class="btn btn-ghost btn-sm" href="#" id="export-csv">Экспорт CSV</a>
+            </div>
+          </div>
+          <p class="panel-note" id="orders-summary">—</p>
+          <div class="table-wrap">
+            <table class="admin-table orders-table" id="orders-table">
+              <caption class="sr-only">Поступившие заявки</caption>
+              <thead>
+                <tr>
+                  <th scope="col">№</th>
+                  <th scope="col">Дата</th>
+                  <th scope="col">Контакты</th>
+                  <th scope="col">Комплектация</th>
+                  <th scope="col" class="col-num">Сумма, ₽</th>
+                  <th scope="col">Статус</th>
+                </tr>
+              </thead>
+              <tbody id="orders-body"></tbody>
+            </table>
+          </div>
+          <p class="empty-note" id="orders-empty" hidden>Заявок с выбранным статусом пока нет.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer admin-footer">
+  <div class="container footer-bottom">
+    <span>VirshkeTech · мини-CMS. Данные хранятся в <code>data.json</code>.</span>
+    <a href="/">← На сайт</a>
+  </div>
+</footer>
+
+<script src="/assets/admin.js"></script>
+</body>
+</html>
