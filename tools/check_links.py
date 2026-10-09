@@ -7,7 +7,8 @@ external = []
 for dirpath, dirs, files in os.walk(root):
     dirs[:] = [d for d in dirs if d not in ('node_modules', '.git', 'tools')]
     for fn in files:
-        if not fn.endswith(('.html', '.css', '.js')): continue
+        if fn.endswith('.js'): continue  # ссылки в JS — шаблонные строки, не проверяем
+        if not fn.endswith(('.html', '.css')): continue
         fp = os.path.join(dirpath, fn)
         html = open(fp, encoding='utf-8').read()
         refs = re.findall(r'(?:href|src)="([^"]+)"', html)

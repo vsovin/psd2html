@@ -40,7 +40,7 @@ tpl = '''<!DOCTYPE html>
 </html>
 '''
 
-def calc_markup(nav, default_base=''):
+def calc_markup(nav, default_base='', res=''):
     return f'''<section class="section section-alt" id="calculator">
   <div class="container">
     <h2 class="section-title">Калькулятор комплектации</h2>
@@ -83,8 +83,8 @@ def calc_markup(nav, default_base=''):
           </p>
         </div>
         <figure class="scheme-box">
-          <div data-role="scheme" data-src="{nav}assets/scheme.svg" role="img" aria-label="Схема станка: выбранные модули подсвечиваются оранжевым">
-            <img src="{nav}assets/scheme.svg" alt="Схема токарного станка с осью ТФО-160 и модулями">
+          <div data-role="scheme" data-src="{res}assets/scheme.svg" role="img" aria-label="Схема станка: выбранные модули подсвечиваются оранжевым">
+            <img src="{res}assets/scheme.svg" alt="Схема токарного станка с осью ТФО-160 и модулями">
           </div>
           <figcaption>Выбранные модули подсвечиваются оранжевым прямо на схеме.</figcaption>
         </figure>
@@ -134,6 +134,7 @@ def order_form():
 pages = {}
 
 # ---------------- ГЛАВНАЯ ----------------
+r = ''  # корневые страницы: все пути относительно /
 home = f'''<section class="hero">
   <div class="container hero-grid">
     <div>
@@ -145,7 +146,7 @@ home = f'''<section class="hero">
       </div>
     </div>
     <figure class="hero-scheme">
-      <img src="assets/scheme.svg" alt="Схема токарного станка с установленной осью ТФО-160">
+      <img src="{r}assets/scheme.svg" alt="Схема токарного станка с установленной осью ТФО-160">
     </figure>
   </div>
 </section>
@@ -216,7 +217,7 @@ home = f'''<section class="hero">
   </div>
 </section>
 
-{calc_markup('')}
+{calc_markup('', res=r)}
 
 <section class="section" id="order">
   <div class="container">
@@ -231,9 +232,10 @@ home = f'''<section class="hero">
 pages['/workspace/index.html'] = tpl.format(
     title='ТФО-160 — универсальная четвёртая ось | VirshkeTech',
     desc='Токарно-фрезерная ось ТФО-160: установка на профессиональные ЧПУ (Fanuc, Siemens), ЧПУ начального уровня (Mach3, DDCS) и ручные станки.',
-    p='', r='../', content=home)
+    p='', r='', content=home)
 
 # ---------------- /calculator/ ----------------
+r = '../'
 pages['/workspace/calculator/index.html'] = tpl.format(
     title='Калькулятор комплектации ТФО-160 | VirshkeTech',
     desc='Рассчитайте комплектацию оси ТФО-160: база для вашего станка плюс модули автоматизации.',
@@ -244,7 +246,7 @@ pages['/workspace/calculator/index.html'] = tpl.format(
     <p class="section-lead">Пришли с конкретной страницы? База уже выбрана. Меняйте состав — итог и схема обновляются сразу.</p>
   </div>
 </section>
-{calc_markup('')}''')
+{calc_markup('../', res='../')}''')
 
 # ---------------- /order/ ----------------
 pages['/workspace/order/index.html'] = tpl.format(
@@ -255,7 +257,7 @@ pages['/workspace/order/index.html'] = tpl.format(
   <div class="container">
     <h1 class="page-title">Оформить заказ</h1>
     <p class="section-lead">Ваши контакты и конфигурация из калькулятора — в одной заявке.</p>
-    <div class="form-card" data-order-root data-calc-path="calculator/" data-thanks-path="thanks/">
+    <div class="form-card" data-order-root data-calc-path="../calculator/" data-thanks-path="../thanks/">
       {order_form()}
     </div>
   </div>
@@ -283,7 +285,7 @@ def aud_page(h1, sub, feats_html, connect_title, connect_items, price_str, examp
         <p>{d}</p>
       </article>''' for t, d in examples)
     items = '\n        '.join(f'<li>{i}</li>' for i in connect_items)
-    return f'''<nav class="breadcrumbs container" aria-label="Хлебные крошки"><a href="{r}index.html">Главная</a> / {calc_label}</nav>
+    return f'''<nav class="breadcrumbs container" aria-label="Хлебные крошки"><a href="../index.html">Главная</a> / {calc_label}</nav>
 <section class="hero">
   <div class="container hero-grid">
     <div>
