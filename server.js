@@ -141,17 +141,22 @@ const cleanLine = (v, max = 300) => String(v == null ? '' : v).replace(/\s+/g, '
 const URL_KEYS = new Set(['image', 'page', 'heroImage', 'iconUrl', 'logo', 'href', 'link', 'url', 'ctaLink']);
 const looksLikeUrlKey = (key) => /(^|_)(url|image|img|link|href|logo)$/i.test(key) || /(url|image|img|link|href|social)/i.test(key);
 
-/** Признак «это URL», а не обычный текст: tel:/mailto: тоже считаем ссылками */
+/** Опасные исполняющие схемы: их быть не должно ни в каком поле (в т.ч. в «схеме без ://») */
+const DANGEROUS_SCHEME_RE = /^\s*(javascript|data|vbscript|file|blob):/i;
+
+/** Признак «это URL с протоколом», а не обычный текст: tel:/mailto: тоже считаем ссылками */
 const looksLikeUrlValue = (s) => /^(https?:|tel:|mailto:|\/\/)/i.test(String(s || '').trim());
 
 /**
  * Схема ссылки недопустима, если не http(s) / mailto / tel / относительная.
  * Запрещаем javascript:, data:, vbscript: и прочую исполняющую схему.
- * Обычный текст (телефон «+7 …», адрес, ФИО) схемой не является — пропускаем как есть.
+ * Обычный текст (телефон «+7 …», адрес, ФИО) схемой не является — пропускаем как есть,
+ * но опасную схему вида "javascript:alert(1)" отсекаем всегда.
  */
 const isSafeScheme = (s) => {
   const t = String(s || '').trim();
   if (!t) return true;
+  if (DANGEROUS_SCHEME_RE.test(t)) return false;
   if (!looksLikeUrlValue(t)) return true;
   return /^(https?:\/\/|mailto:|tel:)/i.test(t);
 };

@@ -1,5 +1,5 @@
-# Environment files
-.env
+# Dependencies
+node_modules/
 
-# Backup files
-*.bak
+# Logs
+*.log
