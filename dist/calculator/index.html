@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Калькулятор комплектации ТФО-160 | VirshkeTech</title>
+  <meta name="description" content="Рассчитайте комплектацию оси ТФО-160: база для вашего станка плюс модули автоматизации.">
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="../index.html">Virshke<span>Tech</span>.com</a>
+    <nav class="aud-switch" aria-label="Переключатель аудитории">
+      <a class="pill" href="../cnc-pro/">У меня стойка Fanuc/Siemens</a>
+      <a class="pill" href="../cnc-lite/">У меня Mach3/DDCS</a>
+      <a class="pill" href="../manual/">У меня ручной станок</a>
+    </nav>
+    <a class="header-phone" href="tel:+70000000000" aria-label="Телефон для связи">+7 (000) 000-00-00</a>
+  </div>
+</header>
+<main>
+<nav class="breadcrumbs container" aria-label="Хлебные крошки"><a href="../index.html">Главная</a> / Калькулятор</nav>
+<section class="section">
+  <div class="container">
+    <h1 class="page-title">Калькулятор комплектации ТФО-160</h1>
+    <p class="section-lead">Пришли с конкретной страницы? База уже выбрана. Меняйте состав — итог и схема обновляются сразу.</p>
+  </div>
+</section>
+<section class="section section-alt" id="calculator">
+  <div class="container">
+    <h2 class="section-title">Калькулятор комплектации</h2>
+    <p class="section-lead">Выберите базу под ваш станок и дополнительные модули — итог пересчитается мгновенно, а схема покажет, куда встанет каждый модуль.</p>
+
+    <div class="calc-grid" data-calculator data-default-base="">
+      <div class="calc-panel">
+        <h3 id="calc-base-h">База (выберите одну)</h3>
+        <fieldset class="opt-group" aria-labelledby="calc-base-h">
+          <legend class="vis-hidden">Базовое решение ТФО-160</legend>
+          <label class="opt"><input type="radio" name="calc-base" value="pro">
+            <span class="opt-name">Для профессиональных ЧПУ</span><span class="opt-price">370 000 &#8381;</span></label>
+          <label class="opt"><input type="radio" name="calc-base" value="lite">
+            <span class="opt-name">Для ЧПУ начального уровня</span><span class="opt-price">340 000 &#8381;</span></label>
+          <label class="opt"><input type="radio" name="calc-base" value="manual">
+            <span class="opt-name">Для ручного станка</span><span class="opt-price">370 000 &#8381;</span></label>
+        </fieldset>
+
+        <h3 class="calc-subhead" id="calc-mod-h">Модули (можно несколько)</h3>
+        <fieldset class="opt-group" aria-labelledby="calc-mod-h">
+          <legend class="vis-hidden">Дополнительные модули</legend>
+          <label class="opt"><input type="checkbox" name="calc-mod" value="chuck">
+            <span class="opt-name">Модуль автоматизации токарного патрона</span><span class="opt-price">+120 000 &#8381;</span></label>
+          <label class="opt"><input type="checkbox" name="calc-mod" value="vise">
+            <span class="opt-name">Автозажим тисков</span><span class="opt-price">+95 000 &#8381;</span></label>
+          <label class="opt"><input type="checkbox" name="calc-mod" value="tailstock">
+            <span class="opt-name">Автоматическая задняя бабка</span><span class="opt-price">+140 000 &#8381;</span></label>
+          <label class="opt"><input type="checkbox" name="calc-mod" value="robot">
+            <span class="opt-name">Робот для подачи заготовок</span><span class="opt-price">+350 000 &#8381;</span></label>
+        </fieldset>
+      </div>
+
+      <div class="calc-side">
+        <div class="calc-panel calc-summary">
+          <h3>Ваша комплектация</h3>
+          <div data-role="summary-lines"><p class="calc-empty">Выберите базу — итог появится здесь.</p></div>
+          <div class="sum-total"><span>Итого:</span><span data-role="summary-total">0 &#8381;</span></div>
+          <p style="margin-top:18px">
+            <a class="btn btn-primary btn-block" href="../order/" data-role="order-btn" data-href="../order/">Оформить заказ</a>
+          </p>
+        </div>
+        <figure class="scheme-box">
+          <div data-role="scheme" data-src="../assets/scheme.svg" role="img" aria-label="Схема станка: выбранные модули подсвечиваются оранжевым">
+            <img src="../assets/scheme.svg" alt="Схема токарного станка с осью ТФО-160 и модулями">
+          </div>
+          <figcaption>Выбранные модули подсвечиваются оранжевым прямо на схеме.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <a class="logo" href="../index.html">Virshke<span>Tech</span>.com</a>
+    <div>
+      <a href="tel:+70000000000">+7 (000) 000-00-00</a> &middot;
+      <a href="mailto:info@virshketech.com">info@virshketech.com</a>
+    </div>
+    <div>&copy; 2026 VirshkeTech. Все права защищены.</div>
+  </div>
+</footer>
+<script src="../assets/script.js"></script>
+</body>
+</html>
