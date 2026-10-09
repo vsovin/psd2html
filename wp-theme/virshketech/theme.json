@@ -1,0 +1,85 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/theme.json",
+  "version": 3,
+  "settings": {
+    "appearanceTools": true,
+    "layout": {
+      "contentSize": "820px",
+      "wideSize": "1200px"
+    },
+    "color": {
+      "custom": true,
+      "defaultPalette": false,
+      "palette": [
+        { "slug": "bg", "color": "#0d1117", "name": "Фон" },
+        { "slug": "card", "color": "#161d27", "name": "Карточка" },
+        { "slug": "accent", "color": "#ff6a1a", "name": "Акцент" },
+        { "slug": "accent-soft", "color": "rgba(255,106,26,0.12)", "name": "Акцент мягкий" },
+        { "slug": "border", "color": "#27313f", "name": "Граница" },
+        { "slug": "text", "color": "#e6edf3", "name": "Текст" },
+        { "slug": "muted", "color": "#8b98a9", "name": "Приглушённый" }
+      ]
+    },
+    "typography": {
+      "fluid": true,
+      "fontFamilies": [
+        {
+          "fontFamily": "system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif",
+          "slug": "system",
+          "name": "Системный"
+        }
+      ],
+      "fontSizes": [
+        { "slug": "small", "size": "0.875rem", "name": "Мелкий" },
+        { "slug": "medium", "size": "1rem", "name": "Средний" },
+        { "slug": "large", "size": "1.25rem", "name": "Крупный" },
+        { "slug": "x-large", "size": "clamp(1.6rem, 3vw, 2.2rem)", "name": "Заголовок секции" },
+        { "slug": "xx-large", "size": "clamp(2rem, 5vw, 3.2rem)", "name": "Hero" }
+      ]
+    },
+    "spacing": {
+      "units": ["px", "rem", "em", "%", "vw"],
+      "spacingSizes": [
+        { "slug": "s", "size": "0.5rem", "name": "S" },
+        { "slug": "m", "size": "1rem", "name": "M" },
+        { "slug": "l", "size": "2rem", "name": "L" },
+        { "slug": "xl", "size": "4rem", "name": "XL" }
+      ]
+    },
+    "useRootPaddingAwareAlignments": true
+  },
+  "styles": {
+    "color": {
+      "background": "var(--wp--preset--color--bg)",
+      "text": "var(--wp--preset--color--text)"
+    },
+    "typography": {
+      "fontFamily": "var(--wp--preset--font-family--system)",
+      "fontSize": "var(--wp--preset--font-size--medium)",
+      "lineHeight": "1.6"
+    },
+    "elements": {
+      "link": {
+        "color": { "text": "var(--wp--preset--color--accent)" },
+        ":hover": { "color": { "text": "#ff8a4a" } }
+      },
+      "button": {
+        "color": {
+          "background": "var(--wp--preset--color--accent)",
+          "text": "#fff"
+        },
+        "border": { "radius": "14px" },
+        "typography": { "fontWeight": "600" }
+      },
+      "h1": { "typography": { "fontSize": "var(--wp--preset--font-size--xx-large)" } },
+      "h2": { "typography": { "fontSize": "var(--wp--preset--font-size--x-large)" } }
+    },
+    "spacing": {
+      "padding": { "left": "1rem", "right": "1rem" }
+    }
+  },
+  "templateParts": [
+    { "name": "header", "title": "Шапка (логотип, переключатель аудитории, телефон)", "area": "header" },
+    { "name": "footer", "title": "Подвал (контакты, копирайт)", "area": "footer" }
+  ]
+}
