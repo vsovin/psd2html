@@ -1,0 +1,26 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "virshketech/calculator",
+	"version": "1.0.0",
+	"title": "Калькулятор комплектации",
+	"category": "virshketech",
+	"icon": "calculator",
+	"description": "Интерактивный калькулятор: базы из «Настройки › Калькулятор», модули из CPT «Модули».",
+	"supports": {
+		"html": false,
+		"align": [
+			"wide",
+			"full"
+		]
+	},
+	"attributes": {
+		"base_default": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"textdomain": "virshketech",
+	"editorScript": "file:./index.js",
+	"renderCallback": "vtk_render_calculator_block"
+}

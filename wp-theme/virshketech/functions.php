@@ -12,9 +12,11 @@ define( 'VTK_VERSION', '1.0.0' );
 define( 'VTK_DIR', get_template_directory() );
 define( 'VTK_URI', get_template_directory_uri() );
 
+require_once VTK_DIR . '/inc/render.php';    // PHP-рендер динамических блоков
 require_once VTK_DIR . '/inc/cpt.php';        // CPT: audience_page, calc_module, order_request
 require_once VTK_DIR . '/inc/blocks.php';     // Кастомные Gutenberg-блоки
-require_once VTK_DIR . '/inc/settings.php';   // Настройки > Калькулятор + метабоксы CPT
+require_once VTK_DIR . '/inc/settings.php';   // Настройки > Калькулятор
+require_once VTK_DIR . '/inc/metaboxes.php';  // Метабоксы CPT (meta box API)
 require_once VTK_DIR . '/inc/forms.php';      // Обработка формы заказа, email-уведомления, CSV
 require_once VTK_DIR . '/inc/rest-api.php';   // POST /wp-json/virshketech/v1/order, GET модулей
 

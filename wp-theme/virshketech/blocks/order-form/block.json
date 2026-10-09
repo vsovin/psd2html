@@ -1,0 +1,17 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "virshketech/order-form",
+	"version": "1.0.0",
+	"title": "Форма заказа",
+	"category": "virshketech",
+	"icon": "feedback",
+	"description": "Форма заявки: валидация на клиенте, сохранение в «Заявки», email-уведомление, редирект на /thanks/.",
+	"supports": {
+		"html": false
+	},
+	"attributes": {},
+	"textdomain": "virshketech",
+	"editorScript": "file:./index.js",
+	"renderCallback": "vtk_render_order_form_block"
+}

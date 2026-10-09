@@ -1,0 +1,30 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "virshketech/scheme",
+	"version": "1.0.0",
+	"title": "Схема станка с модулями",
+	"category": "virshketech",
+	"icon": "art",
+	"description": "SVG-схема ТФО-160; выбранные модули калькулятора подсвечиваются оранжевым.",
+	"supports": {
+		"html": false,
+		"align": [
+			"wide",
+			"full"
+		]
+	},
+	"attributes": {
+		"src": {
+			"type": "string",
+			"default": ""
+		},
+		"caption": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"textdomain": "virshketech",
+	"editorScript": "file:./index.js",
+	"renderCallback": "vtk_block_scheme_render"
+}
