@@ -175,7 +175,7 @@ Gmail/Yandex требуют «пароль приложения»; для про
 
 Все `/api/admin/*` кроме `login` требуют Bearer-токен, иначе `401`.
 
-## Запуск в продакшене
+## Запуск в продакшене (кратко; полная инструкция — ниже, в разделе «Развёртывание»)
 
 ```bash
 pm2 start server.js --name virshketech && pm2 save && pm2 startup   # постоянный процесс
@@ -204,6 +204,136 @@ npm i --no-save jsdom && node tests/uitest.mjs
 валидацию формы, заполнение `data-bind` на главной. Текущий результат — **32 passed, 0 failed**.
 Дополнительно API проверен curl-ом: `401` без токена, `400` на невалидную заявку, отбрасывание
 несуществующих модулей, очистка опасных URL-схем при сохранении, корректный CSV.
+
+## Развёртывание: какой хостинг подойдёт
+
+Проект **нельзя** залить на обычный «виртуальный» (shared) PHP-хостинг: там нет Node.js,
+нет возможности держать фоновый процесс и нельзя открыть порт — а без этого не работают
+`/api/*`, то есть форма заявки и админка. Только статика (HTML/CSS/JS) на shared-хостинге
+жить будет, но калькулятор потеряет цены из data.json, а сохранение заявок станет невозможным.
+
+| Тип хостинга | Подходит? | Что делать |
+|---|---|---|
+| Shared-хостинг c PHP (Timeweb/Reg.ru «базовый», Hostinger Single и т.п.) | ❌ для API | Переходить на VPS или PaaS |
+| VPS/VDS с root (Timeweb VPS, Beget VDS, Selectel, DigitalOcean) | ✅ оптимально | Инструкция ниже |
+| PaaS с бесплатным тарифом | ✅ для теста | Render / Railway / Fly.io — см. отдельный блок |
+| Обычный shared + «только витрина» | ⚠️ частично | Заявки отправлять на внешний сервис (Formspree/Telegram-бот), CMS не будет |
+
+### Вариант 1. VPS (рекомендуемый) — Ubuntu 22.04/24.04
+
+1. **Подключиться и обновить систему**
+   ```bash
+   ssh root@IP_ВАШЕГО_СЕРВЕРА
+   apt update && apt upgrade -y
+   ```
+
+2. **Установить Node.js 20+** (проект требует `engines.node >= 20`)
+   ```bash
+   curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+   apt install -y nodejs git nginx
+   node -v        # должно быть v20.x
+   ```
+
+3. **Положить код** (например, из репозитория или через scp)
+   ```bash
+   mkdir -p /var/www && cd /var/www
+   git clone <ваш-репозиторий> virshketech    # либо: scp -r ./virshketech-site root@IP:/var/www/virshketech
+   cd virshketech
+   npm ci --omit=dev                          # ставим только express, dotenv, nodemailer
+   ```
+
+4. **Настроить `.env`**
+   ```bash
+   cp .env.example .env
+   nano .env     # ADMIN_PASSWORD — обязательно свой; PORT=3000; при необходимости SMTP_*
+   chmod 600 .env
+   ```
+
+5. **Запустить через pm2** (переживает перезагрузку сервера и падения процесса)
+   ```bash
+   npm i -g pm2
+   pm2 start server.js --name virshketech
+   pm2 save
+   pm2 startup            # выполните команду, которую pm2 выведет
+   ```
+
+   Сервер слушает только `localhost:3000` (`app.listen(PORT)` в `server.js`), наружу порт
+   не открыт — это правильно, весь трафик пойдёт через nginx.
+
+6. **Nginx как reverse proxy + HTTPS**
+   ```bash
+   nano /etc/nginx/sites-available/virshketech
+   ```
+   ```nginx
+   server {
+       listen 80;
+       server_name virshketech.ru www.virshketech.ru;
+
+       client_max_body_size 256k;      # тела запросов заведомо маленькие
+
+       location / {
+           proxy_pass http://127.0.0.1:3000;
+           proxy_http_version 1.1;
+           proxy_set_header Host $host;
+           proxy_set_header X-Real-IP $remote_addr;
+           proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+           proxy_set_header X-Forwarded-Proto $scheme;
+       }
+   }
+   ```
+   ```bash
+   ln -s /etc/nginx/sites-available/virshketech /etc/nginx/sites-enabled/
+   nginx -t && systemctl reload nginx
+   apt install -y certbot python3-certbot-nginx
+   certbot --nginx -d virshketech.ru -d www.virshketech.ru   # бесплатный Let's Encrypt
+   ```
+
+   HTTPS обязателен: токен админки и данные формы по http уходят открытым текстом.
+
+7. **Права на запись данных.** `data.json` сервер перезаписывает на каждое действие CMS/заявки:
+   ```bash
+   chown -R www-data:www-data /var/www/virshketech/data.json*   # или пользователь, под которым работает pm2
+   chmod 600 /var/www/virshketech/data.json
+   ```
+
+8. **Файрвол** — закрыть всё, кроме 80/443/SSH:
+   ```bash
+   ufw allow OpenSSH && ufw allow 'Nginx Full' && ufw enable
+   ```
+
+9. **Проверка**
+   ```bash
+   curl -I https://virshketech.ru/
+   curl https://virshketech.ru/api/data | head -c 200
+   ```
+   Админка: `https://virshketech.ru/admin.html`. Резервная копия — `data.json`
+   (рядом всегда лежит `data.json.bak`).
+
+### Вариант 2. PaaS (Render / Railway / Fly.io) — быстро, для тестов
+
+Никаких файлов конфигурации добавлять не нужно: `package.json` уже содержит корректный
+`start`-скрипт (`node server.js`), а приложение берёт порт из переменной окружения.
+
+1. Залейте проект в Git-репозиторий (в `.gitignore` уже исключены `node_modules`, `.env`, `*.log`).
+2. Создайте сервис из репозитория: Build command `npm ci`, Start command `npm start`.
+3. В настройках сервиса добавьте переменные окружения: `ADMIN_PASSWORD`, при необходимости
+   `SMTP_HOST/SMTP_PORT/SMTP_USER/SMTP_PASS/MAIL_FROM/ORDER_EMAIL`, `WEBHOOK_URL`.
+   **`PORT` задавать не нужно** — платформа отдаёт его сама, `server.js` его читает.
+4. Не забудьте про `.dockerignore`/исключение `tests/` из образа, если соберёте Docker.
+
+⚠️ Ограничение всех ephemeral-PaaS: файловая система одноразовая. При редиплое или
+на free-плане с «усыплением» **заявки и правки CMS из `data.json` пропадут**. Для боевого
+сайта это неприемлемо — либо используйте постоянный том (Render Persistent Disk,
+Railway Volume), либо сразу VPS из варианта 1. Если хочется остаться на PaaS без тома —
+замените хранилище `data.json` на внешнюю KV/БД, но это уже выход за рамки ТЗ («только JSON-файл»).
+
+### Если хостинг только PHP/shared, а уходить не хочется
+
+Оставляете статику (`public/`) на shared-хостинге, а серверную часть выносите:
+- форма заявки → `POST` на Formspree/Telegram-бота (в `order.html` поменять URL отправки);
+- мини-CMS и цены в этом сценарии работать не будут — контент придётся править в HTML.
+Это деградация функционала, поэтому реалистичный ответ: минимальный VPS (от ~300 ₽/мес) дешевле,
+чем переделывать сайт.
 
 ## Что редактирует владелец (без программиста)
 
