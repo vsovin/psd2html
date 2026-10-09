@@ -767,7 +767,12 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ password: password })
       })
-        .then(function (r) { return r.json().then(function (j) { return { status: r.status, json: j }; }); })
+        // Если тело не-JSON (например, прокси вернул HTML) — статус берём из ответа
+        .then(function (r) {
+          return r.json()
+            .catch(function () { return { error: 'Сервер ответил некорректно.' }; })
+            .then(function (j) { return { status: r.status, json: j }; });
+        })
         .then(function (res) {
           $('#login-btn').disabled = false;
           if (res.status === 200 && res.json.ok) {

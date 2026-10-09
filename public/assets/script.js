@@ -466,7 +466,7 @@
       writeStorage({ base: selection.base, modules: selection.modules, savedAt: Date.now() });
       // Дублируем конфиг в query — переживает открытые табы и ручную печать URL
       var cfg = selection.base + (selection.modules.length ? '+' + selection.modules.join(',') : '');
-      location.href = '/order.html?cfg=' + encodeURIComponent(cfg);
+      location.assign('/order.html?cfg=' + encodeURIComponent(cfg));
     });
 
     var resetBtn = $('#calc-reset-btn');

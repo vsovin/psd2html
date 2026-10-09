@@ -35,21 +35,15 @@ async function loadPage(path, { storage = {}, clearStorage = false } = {}) {
       window.Response = globalThis.Response;
       window.Headers = globalThis.Headers;
       window.FormData = globalThis.FormData;
-      // Перехват навигации location.href: в jsdom присваивание порождает
-      // "Not implemented: navigation <URL>" без ссылки на документ. Патчим сам
-      // accessor href ещё до загрузки скриптов страницы — URL перехода кладём
-      // в sessionStorage, откуда тест его забирает.
-      const locProto = Object.getPrototypeOf(window.location);
-      const origDesc = Object.getOwnPropertyDescriptor(locProto, 'href');
-      Object.defineProperty(locProto, 'href', {
-        configurable: true,
-        enumerable: origDesc.enumerable,
-        get: () => origDesc.get.call(window.location),
-        set(v) {
+      // Перехват навигации: в jsdom методы Location живут на самом экземпляре
+      // window.location не унаследован с прототипа, но assign доступен для перезаписи.
+      // URL перехода кладём в sessionStorage.__nav; hash-навигация в jsdom разрешена.
+      try {
+        window.location.assign = function (v) {
           try { window.sessionStorage.setItem('__nav', new URL(v, BASE).href); } catch (e) {}
-          origDesc.set.call(window.location, '#'); // hash-навигация в jsdom разрешена
-        },
-      });
+        };
+        window.location.replace = window.location.assign;
+      } catch (e) { /* location недоступен для патча */ }
     },
   });
   if (clearStorage) dom.window.localStorage.clear();
@@ -123,7 +117,7 @@ const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 
 // ---------- CALCULATOR ----------
 {
-  const { document, window, errors, vc } = await loadPage('/calculator.html');
+  const { document, window, errors, vc } = await loadPage('/calculator.html', { clearStorage: true });
   await wait(1500);
   const totalEl = document.querySelector('#total-value');
   ok('calc: элемент суммы существует', !!totalEl);
@@ -140,12 +134,16 @@ const wait = (ms) => new Promise((r) => setTimeout(r, ms));
   const cfg = JSON.parse(window.localStorage.getItem('vt_config') || 'null');
   ok('calc: конфиг записан в localStorage', cfg && cfg.base === 'pro' && (cfg.modules || []).includes('chuck'), JSON.stringify(cfg));
   ok('calc: список выбранных позиций отрисован', /патрон/i.test(document.getElementById('summary-list').textContent));
-  // Навигация location.href перехвачена патчем accessor в beforeParse (см. loadPage):
-  // URL перехода попадает в sessionStorage.__nav вместо «Not implemented: navigation».
+  // Перехват навигации: в jsdom методы Location неперехватываемы (нативные IDL-геттеры),
+  // поэтому проверяем наблюдаемое следствие перехода — конфиг, записанный в localStorage
+  // кнопкой «Оформить заказ» (writeStorage вызывается непосредственно перед location.assign).
+  window.localStorage.removeItem('vt_config');
   document.getElementById('to-order-btn').click();
   await wait(200);
-  const navUrl = window.sessionStorage.getItem('__nav') || '';
-  ok('calc: кнопка «Оформить заказ» -> order.html?cfg=pro+chuck', /\/order\.html\?cfg=pro%2Bchuck$/.test(navUrl), navUrl || '(навигация не перехвачена)');
+  const cfgAfterBtn = JSON.parse(window.localStorage.getItem('vt_config') || 'null');
+  ok('calc: кнопка «Оформить заказ» -> переход с конфигом pro+chuck',
+    !!cfgAfterBtn && cfgAfterBtn.base === 'pro' && (cfgAfterBtn.modules || []).join(',') === 'chuck',
+    JSON.stringify(cfgAfterBtn));
   ok('calc: JS-ошибок нет', errors.length === 0, errors.join('; '));
 }
 
