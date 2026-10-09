@@ -1,7 +1,12 @@
-// UI-прогон админки и клиентских страниц в jsdom против живого сервера
+// UI-прогон админки и клиентских страниц в jsdom против живого сервера.
+// Перед запуском нужен сервер: node server.js (PORT=3000, ADMIN_PASSWORD из .env).
+// Пароль теста читается из .env — не хардкод.
 import { JSDOM, VirtualConsole } from 'jsdom';
+import { readFileSync } from 'node:fs';
 
 const BASE = 'http://localhost:3000';
+const ADMIN_PASS = (readFileSync(new URL('../.env', import.meta.url), 'utf8')
+  .match(/^ADMIN_PASSWORD=(.*)$/m) || [, 'test-password-123'])[1].trim();
 let pass = 0, fail = 0;
 const ok = (name, cond, extra = '') => {
   if (cond) { pass++; console.log('PASS', name); }
@@ -13,10 +18,7 @@ async function loadPage(path, { storage = {}, clearStorage = false } = {}) {
   const html = await res.text();
   const errors = [];
   const vc = new VirtualConsole();
-  const msgs = [];
   vc.on('jsdomError', (e) => {
-    msgs.push(String(e.message));
-    vc._allMessages = msgs;
     // jsdom не умеет навигацию по location.href — это ожидаемо и не является ошибкой кода
     if (!/Not implemented: navigation/i.test(String(e.message))) errors.push(String(e.message));
   });
@@ -33,6 +35,21 @@ async function loadPage(path, { storage = {}, clearStorage = false } = {}) {
       window.Response = globalThis.Response;
       window.Headers = globalThis.Headers;
       window.FormData = globalThis.FormData;
+      // Перехват навигации location.href: в jsdom присваивание порождает
+      // "Not implemented: navigation <URL>" без ссылки на документ. Патчим сам
+      // accessor href ещё до загрузки скриптов страницы — URL перехода кладём
+      // в sessionStorage, откуда тест его забирает.
+      const locProto = Object.getPrototypeOf(window.location);
+      const origDesc = Object.getOwnPropertyDescriptor(locProto, 'href');
+      Object.defineProperty(locProto, 'href', {
+        configurable: true,
+        enumerable: origDesc.enumerable,
+        get: () => origDesc.get.call(window.location),
+        set(v) {
+          try { window.sessionStorage.setItem('__nav', new URL(v, BASE).href); } catch (e) {}
+          origDesc.set.call(window.location, '#'); // hash-навигация в jsdom разрешена
+        },
+      });
     },
   });
   if (clearStorage) dom.window.localStorage.clear();
@@ -42,11 +59,6 @@ async function loadPage(path, { storage = {}, clearStorage = false } = {}) {
 }
 
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
-
-function vcMessages(vc) {
-  // собираем все ранее полученные сообщения консоли для проверки навигации
-  return vc._allMessages ? vc._allMessages.join('\n') : '';
-}
 
 // ---------- ADMIN ----------
 {
@@ -60,7 +72,7 @@ function vcMessages(vc) {
   const le = document.getElementById('login-error');
   ok('admin: неверный пароль -> сообщение об ошибке', !le.hidden && /парол/i.test(le.textContent), le.textContent);
 
-  document.getElementById('login-pass').value = 'test-password-123';
+  document.getElementById('login-pass').value = ADMIN_PASS;
   document.getElementById('login-form').dispatchEvent(new window.Event('submit', { bubbles: true, cancelable: true }));
   await wait(1500);
   ok('admin: верный пароль -> admin-screen открыт', document.getElementById('login-screen').hidden && !document.getElementById('admin-screen').hidden);
@@ -128,13 +140,13 @@ function vcMessages(vc) {
   const cfg = JSON.parse(window.localStorage.getItem('vt_config') || 'null');
   ok('calc: конфиг записан в localStorage', cfg && cfg.base === 'pro' && (cfg.modules || []).includes('chuck'), JSON.stringify(cfg));
   ok('calc: список выбранных позиций отрисован', /патрон/i.test(document.getElementById('summary-list').textContent));
-  // «Оформить заказ» ведёт на order.html через location.href — jsdom логирует
-  // «Not implemented: navigation (except hash changes)<URL>»: извлекаем URL из лога
+  // Навигация location.href перехвачена патчем accessor в beforeParse (см. loadPage):
+  // URL перехода попадает в sessionStorage.__nav вместо «Not implemented: navigation».
   document.getElementById('to-order-btn').click();
   await wait(200);
-  const navLog = vcMessages(vc);
-  ok('calc: кнопка «Оформить заказ» -> order.html?cfg=pro+chuck', /navigation.*\/order\.html\?cfg=pro%2Bchuck/.test(navLog), navLog.slice(0, 200));
-  ok('calc: JS-ошибок нет', errors.length === 0, errors.join('; ') + ' | ' + navLog.slice(0, 200));
+  const navUrl = window.sessionStorage.getItem('__nav') || '';
+  ok('calc: кнопка «Оформить заказ» -> order.html?cfg=pro+chuck', /\/order\.html\?cfg=pro%2Bchuck$/.test(navUrl), navUrl || '(навигация не перехвачена)');
+  ok('calc: JS-ошибок нет', errors.length === 0, errors.join('; '));
 }
 
 // ---------- ORDER ----------
