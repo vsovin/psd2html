@@ -1,0 +1,41 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "virshketech/audience-card",
+	"version": "1.0.0",
+	"title": "Карточка аудитории",
+	"category": "virshketech",
+	"icon": "admin-users",
+	"description": "Карточка развилки аудиторий на главной: заголовок, описание, функции, цена, ссылка.",
+	"supports": {
+		"html": false
+	},
+	"attributes": {
+		"title": {
+			"type": "string",
+			"default": "Профессиональные ЧПУ"
+		},
+		"desc": {
+			"type": "string",
+			"default": ""
+		},
+		"price": {
+			"type": "number",
+			"default": 0
+		},
+		"url": {
+			"type": "string",
+			"default": "#TODO: ссылка на страницу аудитории"
+		},
+		"linkText": {
+			"type": "string",
+			"default": "Перейти"
+		},
+		"features": {
+			"type": "array",
+			"default": []
+		}
+	},
+	"textdomain": "virshketech",
+	"editorScript": "file:./index.js"
+}

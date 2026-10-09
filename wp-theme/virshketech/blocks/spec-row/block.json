@@ -1,0 +1,25 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "virshketech/spec-row",
+	"version": "1.0.0",
+	"title": "Характеристика ТФО",
+	"category": "virshketech",
+	"icon": "performance",
+	"description": "Строка таблицы характеристик ТФО-160: параметр и значение (плейсхолдер — «уточняется»).",
+	"supports": {
+		"html": false
+	},
+	"attributes": {
+		"label": {
+			"type": "string",
+			"default": ""
+		},
+		"value": {
+			"type": "string",
+			"default": "уточняется"
+		}
+	},
+	"textdomain": "virshketech",
+	"editorScript": "file:./index.js"
+}

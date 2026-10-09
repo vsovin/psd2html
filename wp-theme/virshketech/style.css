@@ -1,0 +1,16 @@
+/*
+Theme Name: VirshkeTech
+Theme URI: https://virshketech.com/
+Author: VirshkeTech
+Description: Кастомная блочная тема (block theme) для сайта токарно-фрезерной оси ТФО-160. Gutenberg, CPT посадочных аудиторий, калькулятор комплектации, приём заявок через REST API.
+Version: 1.0.0
+Requires at least: 6.5
+Tested up to: 6.6
+Requires PHP: 8.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: virshketech
+Tags: custom-theme, block-editor, dark
+*/
+
+/* Метаданные темы. Основной CSS фронтенда — assets/style.css */

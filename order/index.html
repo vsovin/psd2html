@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Заказ ТФО-160 | VirshkeTech</title>
+  <meta name="description" content="Форма заявки на токарно-фрезерную ось ТФО-160 с выбранной комплектацией.">
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="../index.html">Virshke<span>Tech</span>.com</a>
+    <nav class="aud-switch" aria-label="Переключатель аудитории">
+      <a class="pill" href="../cnc-pro/">У меня стойка Fanuc/Siemens</a>
+      <a class="pill" href="../cnc-lite/">У меня Mach3/DDCS</a>
+      <a class="pill" href="../manual/">У меня ручной станок</a>
+    </nav>
+    <a class="header-phone" href="tel:+70000000000" aria-label="Телефон для связи">+7 (000) 000-00-00</a>
+  </div>
+</header>
+<main>
+<nav class="breadcrumbs container" aria-label="Хлебные крошки"><a href="../index.html">Главная</a> / Заказ</nav>
+<section class="section">
+  <div class="container">
+    <h1 class="page-title">Оформить заказ</h1>
+    <p class="section-lead">Ваши контакты и конфигурация из калькулятора — в одной заявке.</p>
+    <div class="form-card" data-order-root data-calc-path="../calculator/" data-thanks-path="../thanks/">
+      <form data-order-form novalidate>
+      <div class="config-strip" data-role="config-strip"></div>
+      <div class="field">
+        <label for="f-name">Имя <span class="req">*</span></label>
+        <input id="f-name" type="text" name="name" required autocomplete="name" placeholder="Иван Петров">
+        <p class="err-msg" role="alert">Укажите имя.</p>
+      </div>
+      <div class="field">
+        <label for="f-company">Компания</label>
+        <input id="f-company" type="text" name="company" autocomplete="organization" placeholder="ООО «Станкоремонт»">
+        <p class="err-msg" role="alert"></p>
+      </div>
+      <div class="field">
+        <label for="f-phone">Телефон <span class="req">*</span></label>
+        <input id="f-phone" type="tel" name="phone" required inputmode="tel" autocomplete="tel" placeholder="+7 (___) ___-__-__">
+        <p class="err-msg" role="alert">Введите телефон полностью: +7 (XXX) XXX-XX-XX.</p>
+      </div>
+      <div class="field">
+        <label for="f-email">E-mail</label>
+        <input id="f-email" type="email" name="email" autocomplete="email" placeholder="you@company.ru">
+        <p class="err-msg" role="alert">Проверьте формат e-mail.</p>
+      </div>
+      <div class="field">
+        <label for="f-machine">Модель станка и стойка ЧПУ</label>
+        <textarea id="f-machine" name="machine" placeholder="Например: DMG CTX 310, стойка Fanuc 0i-TF"></textarea>
+        <p class="err-msg" role="alert"></p>
+      </div>
+      <input type="hidden" name="config" value="">
+      <div class="field">
+        <label class="consent"><input type="checkbox" name="consent" required>
+          Согласен(на) на обработку персональных данных <span class="req">*</span></label>
+        <p class="err-msg" role="alert">Без согласия мы не сможем обработать заявку.</p>
+      </div>
+      <button class="btn btn-primary btn-block" type="submit">Отправить заявку</button>
+      <p class="form-note">Ответим в рабочее время в течение 2 часов. Заявка уходит на demo-адрес /api/order (заглушка).</p>
+    </form>
+    </div>
+  </div>
+</section>
+</main>
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <a class="logo" href="../index.html">Virshke<span>Tech</span>.com</a>
+    <div>
+      <a href="tel:+70000000000">+7 (000) 000-00-00</a> &middot;
+      <a href="mailto:info@virshketech.com">info@virshketech.com</a>
+    </div>
+    <div>&copy; 2026 VirshkeTech. Все права защищены.</div>
+  </div>
+</footer>
+<script src="../assets/script.js"></script>
+</body>
+</html>
