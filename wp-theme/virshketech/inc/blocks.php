@@ -34,6 +34,11 @@ function vtk_register_blocks() {
 		'render_callback' => 'vtk_block_spec_row_render',
 	) );
 
+	// audience-hero: рендерится PHP по текущему post (single-audience_page.html).
+	register_block_type_from_metadata( $dir . '/audience-hero', array(
+		'render_callback' => 'vtk_block_audience_hero_render',
+	) );
+
 	foreach ( array( 'audience-card', 'scheme', 'audience-grid', 'calculator', 'order-form' ) as $slug ) {
 		register_block_type_from_metadata( $dir . '/' . $slug );
 	}
@@ -47,51 +52,53 @@ function vtk_block_spec_row_render( $attributes ) {
 	return '<tr class="spec-row"><th scope="row">' . $label . '</th><td>' . $value . '</td></tr>';
 }
 
-/** SVG-схема станка (блок virshketech/scheme): img + data-src для inline-подсветки JS. */
+/** SVG-схема станка (блок virshketech/scheme). variant: hero | calc. */
 function vtk_block_scheme_render( $attributes ) {
-	$src = ! empty( $attributes['src'] )
-		? esc_url_raw( $attributes['src'] )
-		: VTK_URI . '/assets/scheme.svg';
-	$caption = isset( $attributes['caption'] ) ? sanitize_text_field( $attributes['caption'] ) : '';
-	$alt     = $caption ? $caption : __( 'Схема токарного станка с осью ТФО-160 и модулями', 'virshketech' );
-
-	return '<figure class="scheme" data-role="scheme" data-src="' . esc_url( $src ) . '">'
-		. '<img src="' . esc_url( $src ) . '" alt="' . esc_attr( $alt ) . '">'
-		. ( $caption ? '<figcaption>' . esc_html( $caption ) . '</figcaption>' : '' )
-		. '</figure>';
+	$variant = isset( $attributes['variant'] ) && in_array( $attributes['variant'], array( 'hero', 'calc' ), true )
+		? $attributes['variant']
+		: 'hero';
+	$args = array( 'variant' => $variant );
+	if ( ! empty( $attributes['caption'] ) ) {
+		$args['aria_label'] = sanitize_text_field( $attributes['caption'] );
+	}
+	return vtk_render_scheme_html( $args, true );
 }
 
 /** Сетка карточек аудиторий (блок virshketech/audience-grid) по CPT audience_page. */
 function vtk_block_audience_grid_render( $attributes ) {
 	$heading = isset( $attributes['heading'] ) ? sanitize_text_field( $attributes['heading'] ) : '';
+	$lead    = isset( $attributes['lead'] ) ? sanitize_textarea_field( $attributes['lead'] ) : '';
 	$cards   = vtk_audience_cards();
 
 	ob_start();
 	?>
-	<section class="branch">
+	<div class="container">
 		<?php if ( $heading ) : ?>
-			<h2><?php echo esc_html( $heading ); ?></h2>
+			<h2 class="section-title"><?php echo esc_html( $heading ); ?></h2>
+		<?php endif; ?>
+		<?php if ( $lead ) : ?>
+			<p class="section-lead"><?php echo esc_html( $lead ); ?></p>
 		<?php endif; ?>
 		<?php if ( empty( $cards ) ) : ?>
-			<p class="muted"><?php esc_html_e( 'Страницы аудиторий ещё не созданы (раздел «Аудитории» в админке).', 'virshketech' ); ?></p>
+			<p class="section-lead"><?php esc_html_e( 'Страницы аудиторий ещё не созданы (раздел «Аудитории» в админке).', 'virshketech' ); ?></p>
 		<?php else : ?>
-			<div class="grid grid--3">
-				<?php foreach ( $cards as $c ) : ?>
-					<article class="card card--branch">
+			<div class="cards-3">
+				<?php foreach ( $cards as $i => $c ) : ?>
+					<article class="aud-card<?php echo $i === 1 ? ' featured' : ''; ?>">
 						<h3><?php echo esc_html( $c['title'] ); ?></h3>
-						<?php if ( $c['desc'] ) : ?><p class="muted"><?php echo esc_html( $c['desc'] ); ?></p><?php endif; ?>
-						<ul class="featlist">
+						<?php if ( $c['desc'] ) : ?><p class="brands"><?php echo esc_html( $c['desc'] ); ?></p><?php endif; ?>
+						<ul class="feat-list">
 							<?php foreach ( $c['features'] as $f ) : ?>
-								<li class="<?php echo $f['available'] ? 'yes' : 'no'; ?>"><?php echo esc_html( $f['text'] ); ?></li>
+								<li><?php echo esc_html( $f['text'] ); ?></li>
 							<?php endforeach; ?>
 						</ul>
-						<p class="card--branch__price"><?php echo vtk_price_html( $c['price'] ); // phpcs:ignore WordPress.Security.EscapeOutput -- форматируется целое ?></p>
-						<a class="btn btn--accent" href="<?php echo esc_url( $c['url'] ); ?>"><?php esc_html_e( 'Перейти', 'virshketech' ); ?></a>
+						<p class="price-line"><?php echo vtk_price_html( $c['price'] ); // phpcs:ignore WordPress.Security.EscapeOutput -- форматируется целое ?><small><?php esc_html_e( 'Стоимость решения', 'virshketech' ); ?></small></p>
+						<a class="card-link" href="<?php echo esc_url( $c['url'] ); ?>"><?php esc_html_e( 'Перейти', 'virshketech' ); ?></a>
 					</article>
 				<?php endforeach; ?>
 			</div>
 		<?php endif; ?>
-	</section>
+	</div>
 	<?php
 	return ob_get_clean();
 }

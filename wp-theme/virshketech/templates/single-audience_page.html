@@ -1,0 +1,24 @@
+<!--
+  Посадочная страница аудитории. Герой и блоки рендерит virshketech/audience-hero
+  из CPT-мета (inc/render.php); ниже — произвольный контент редактора.
+-->
+<!-- wp:template-part {"slug":"header","area":"header"} /-->
+<main id="main">
+<!-- wp:virshketech/audience-hero /-->
+<!-- wp:group {"className":"section","layout":{"type":"constrained"}} -->
+<div class="wp-block-group section">
+<!-- wp:post-content {"layout":{"type":"constrained"}} /-->
+<!-- wp:group {"className":"cta-row","layout":{"type":"flex","flexWrap":"wrap"}} -->
+<div class="wp-block-group cta-row">
+<!-- wp:button {"className":"btn-primary"} -->
+<div class="wp-block-button btn-primary"><a class="wp-block-button__link" href="/calculator/">Рассчитать комплектацию</a></div>
+<!-- /wp:button -->
+<!-- wp:button {"className":"btn-ghost"} -->
+<div class="wp-block-button btn-ghost"><a class="wp-block-button__link" href="/order/">Оформить заказ</a></div>
+<!-- /wp:button -->
+</div>
+<!-- /wp:group -->
+</div>
+<!-- /wp:group -->
+</main>
+<!-- wp:template-part {"slug":"footer","area":"footer"} /-->

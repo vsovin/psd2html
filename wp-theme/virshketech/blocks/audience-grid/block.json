@@ -1,26 +1,30 @@
 {
-	"$schema": "https://schemas.wp.org/trunk/block.json",
-	"apiVersion": 3,
-	"name": "virshketech/audience-grid",
-	"version": "1.0.0",
-	"title": "Развилка аудиторий",
-	"category": "virshketech",
-	"icon": "admin-users",
-	"description": "Сетка карточек A/B/C: автоматически подтягивает активные «Страницы аудиторий» из админки.",
-	"supports": {
-		"html": false,
-		"align": [
-			"wide",
-			"full"
-		]
-	},
-	"attributes": {
-		"heading": {
-			"type": "string",
-			"default": "На какой станок будем ставить?"
-		}
-	},
-	"textdomain": "virshketech",
-	"editorScript": "file:./index.js",
-	"renderCallback": "vtk_block_audience_grid_render"
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "virshketech/audience-grid",
+  "version": "1.0.0",
+  "title": "Развилка аудиторий",
+  "category": "virshketech",
+  "icon": "admin-users",
+  "description": "Сетка карточек A/B/C: автоматически подтягивает активные «Страницы аудиторий» из админки.",
+  "supports": {
+    "html": false,
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "attributes": {
+    "heading": {
+      "type": "string",
+      "default": "На какой станок будем ставить?"
+    },
+    "lead": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "textdomain": "virshketech",
+  "editorScript": "file:./index.js",
+  "renderCallback": "vtk_block_audience_grid_render"
 }

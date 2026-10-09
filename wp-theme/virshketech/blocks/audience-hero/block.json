@@ -1,0 +1,15 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "virshketech/audience-hero",
+  "version": "1.0.0",
+  "title": "Герой страницы аудитории",
+  "category": "virshketech",
+  "icon": "megaphone",
+  "description": "Hero и блок «Что доступно» — автоматически из полей CPT «Страницы аудиторий».",
+  "supports": { "html": false },
+  "attributes": {},
+  "textdomain": "virshketech",
+  "editorScript": "file:./index.js",
+  "renderCallback": "vtk_block_audience_hero_render"
+}

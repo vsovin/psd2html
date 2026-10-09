@@ -15,6 +15,8 @@
 				el( components.PanelBody, { title: __( 'Заголовок секции', 'virshketech' ), initialOpen: true },
 					el( components.TextControl, { label: __( 'Заголовок', 'virshketech' ), value: a.heading,
 						onChange: function ( v ) { set( { heading: v } ); } } ),
+								el( components.TextControl, { label: __( 'Подводка', 'virshketech' ), value: a.lead,
+									onChange: function ( v ) { set( { lead: v } ); } } ),
 					el( components.Disabled, { label: __( 'Источник карточек', 'virshketech' ) },
 						el( 'p', { style: { margin: '4px 0 0', fontSize: '12px' } },
 							__( 'Карточки берутся из раздела «Аудитории»: заголовок, подзаголовок, функции, цена, ссылка. Отметка «Показывать на главной» управляет выводом.', 'virshketech' ) )

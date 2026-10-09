@@ -25,7 +25,7 @@ function vtk_register_cpts() {
 		'menu_icon'    => 'dashicons-buddicons-activity',
 		'menu_position'=> 21,
 		'show_in_rest' => true, // Gutenberg + REST
-		'rewrite'      => array( 'with_front' => false ), // слаг = post_name (cnc-pro, cnc-lite, manual)
+		'rewrite'      => false, // чистые URL /cnc-pro/ и т.п. строит inc/rewrites.php
 		'supports'     => array( 'title', 'editor', 'page-attributes' ),
 	) );
 

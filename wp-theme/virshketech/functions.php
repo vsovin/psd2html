@@ -12,6 +12,8 @@ define( 'VTK_VERSION', '1.0.0' );
 define( 'VTK_DIR', get_template_directory() );
 define( 'VTK_URI', get_template_directory_uri() );
 
+require_once VTK_DIR . '/inc/rewrites.php'; // Чистые URL аудиторий + vtk_page_url
+require_once VTK_DIR . '/inc/helpers.php';   // Хелперы: контакты, URL страниц
 require_once VTK_DIR . '/inc/render.php';    // PHP-рендер динамических блоков
 require_once VTK_DIR . '/inc/cpt.php';        // CPT: audience_page, calc_module, order_request
 require_once VTK_DIR . '/inc/blocks.php';     // Кастомные Gutenberg-блоки
@@ -19,6 +21,8 @@ require_once VTK_DIR . '/inc/settings.php';   // Настройки > Кальк
 require_once VTK_DIR . '/inc/metaboxes.php';  // Метабоксы CPT (meta box API)
 require_once VTK_DIR . '/inc/forms.php';      // Обработка формы заказа, email-уведомления, CSV
 require_once VTK_DIR . '/inc/rest-api.php';   // POST /wp-json/virshketech/v1/order, GET модулей
+require_once VTK_DIR . '/inc/nav-menu.php';  // Пункты меню для посадочных страниц
+require_once VTK_DIR . '/inc/setup.php';      // Первичная настройка: страницы, аудитории, модули
 
 /**
  * Ресурсы фронтенда: CSS прототипа + JS калькулятора/формы.
@@ -139,13 +143,6 @@ function vtk_create_core_pages() {
 	}
 }
 
-/**
- * Помощник: получить URL служебной страницы по слагу (для кнопок/редиректов).
- */
-function vtk_page_url( $slug, $fallback = '' ) {
-	$page = get_page_by_path( $slug );
-	return $page ? get_permalink( $page ) : $fallback;
-}
 
 /**
  * Хелпер форматирования цены «370 000 ₽» — используется в шаблонах блоков и PHP-рендеринге.

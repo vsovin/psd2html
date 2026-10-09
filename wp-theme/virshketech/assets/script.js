@@ -1,24 +1,13 @@
-/* VirshkeTech — общий скрипт сайта (IIFE, без глобальных переменных) */
+/* VirshkeTech — скрипт темы WordPress (IIFE, без глобальных переменных).
+ * Данные калькулятора и endpoint — из window.VirshkeTech (wp_localize_script). */
 (function () {
   'use strict';
 
+  var D = window.VirshkeTech || {};
   var STORAGE_KEY = 'vt_config';
 
-  var BASES = {
-    pro:   { id: 'pro',   label: 'База: для профессиональных ЧПУ', price: 370000 },
-    lite:  { id: 'lite',  label: 'База: для ЧПУ начального уровня', price: 340000 },
-    manual:{ id: 'manual',label: 'База: для ручного станка',        price: 370000 }
-  };
-
-  var MODULES = {
-    chuck:     { id: 'chuck',     label: 'Модуль автоматизации токарного патрона', price: 120000, svg: 'm-chuck' },
-    vise:      { id: 'vise',      label: 'Автозажим тисков',                       price: 95000,  svg: 'm-vise' },
-    tailstock: { id: 'tailstock', label: 'Автоматическая задняя бабка',            price: 140000, svg: 'm-tailstock' },
-    robot:     { id: 'robot',     label: 'Робот для подачи заготовок',             price: 350000, svg: 'm-robot' }
-  };
-
   function fmt(n) {
-    return n.toLocaleString('ru-RU') + ' ₽';
+    return (Number(n) || 0).toLocaleString('ru-RU') + ' ₽';
   }
 
   function readConfig() {
@@ -40,9 +29,25 @@
     var orderBtn   = root.querySelector('[data-role="order-btn"]');
     var schemeWrap = root.querySelector('[data-role="scheme"]');
 
-    // inline SVG схемы нужен для подсветки модулей. fetch работает по http(s);
-    // при file:// оставляем <img>, подсветка в этом случае недоступна (graceful degradation).
-    if (schemeWrap && schemeWrap.dataset.src && window.location.protocol !== 'file:') {
+    // Модули берём из data-атрибутов разметки (PHP рендерит их из CPT calc_module),
+    // поэтому добавление/выключение модулей в админке не требует правки JS.
+    function baseOf(input) {
+      var price = parseInt(D.basePrices ? D.basePrices[input.value] : input.dataset.price, 10) || 0;
+      var labelEl = input.closest('.opt').querySelector('.opt-name');
+      return { id: input.value, label: 'База: ' + labelEl.textContent.trim(), price: price };
+    }
+
+    function modOf(input) {
+      return {
+        id: input.value,
+        label: input.dataset.label || input.closest('.opt').querySelector('.opt-name').textContent.trim(),
+        price: parseInt(input.dataset.price, 10) || 0,
+        svg: input.dataset.svg || ''
+      };
+    }
+
+    // inline SVG схемы нужен для подсветки модулей (fetch работает по http(s)).
+    if (schemeWrap && schemeWrap.dataset.src) {
       fetch(schemeWrap.dataset.src)
         .then(function (r) { return r.text(); })
         .then(function (txt) { schemeWrap.innerHTML = txt; recalc(); })
@@ -51,7 +56,7 @@
 
     function selectedBase() {
       for (var i = 0; i < baseInputs.length; i++) {
-        if (baseInputs[i].checked) return BASES[baseInputs[i].value];
+        if (baseInputs[i].checked) return baseOf(baseInputs[i]);
       }
       return null;
     }
@@ -59,16 +64,16 @@
     function selectedMods() {
       var out = [];
       for (var i = 0; i < modInputs.length; i++) {
-        if (modInputs[i].checked) out.push(MODULES[modInputs[i].value]);
+        if (modInputs[i].checked) out.push(modOf(modInputs[i]));
       }
       return out;
     }
 
     function highlightSvg(mods) {
-      if (!schemeWrap) return;
-      Object.keys(MODULES).forEach(function (k) {
-        var g = schemeWrap.querySelector('#' + MODULES[k].svg);
-        if (g) g.classList.toggle('on', mods.indexOf(MODULES[k]) !== -1);
+      if (!schemeWrap || !schemeWrap.querySelector('svg')) return;
+      mods.forEach(function (m) {
+        var g = m.svg ? schemeWrap.querySelector('#' + m.svg) : null;
+        if (g) g.classList.add('on');
       });
     }
 
@@ -97,6 +102,11 @@
 
       summaryBox.innerHTML = lines || '<p class="calc-empty">Выберите базу — итог появится здесь.</p>';
       totalBox.textContent = fmt(total);
+
+      // перед подсветкой сбрасываем прежние состояния
+      if (schemeWrap && schemeWrap.querySelector('svg')) {
+        schemeWrap.querySelectorAll('g.on').forEach(function (g) { g.classList.remove('on'); });
+      }
       highlightSvg(mods);
       markOptions();
 
@@ -112,7 +122,6 @@
     if (orderBtn) {
       orderBtn.addEventListener('click', function (e) {
         e.preventDefault();
-        // конфиг уже в localStorage; дублируем в query для наглядности URL
         var cfg = readConfig();
         var q = cfg && cfg.items.length ? '?cfg=' + encodeURIComponent(JSON.stringify(cfg)) : '';
         window.location.href = orderBtn.dataset.href + q;
@@ -122,21 +131,18 @@
     // предвыбор базы: ?base=pro|lite|manual или data-default-base у корня
     var params = new URLSearchParams(window.location.search);
     var wantBase = params.get('base') || root.getAttribute('data-default-base');
-    if (wantBase && BASES[wantBase]) {
-      var target = root.querySelector('input[name="calc-base"][value="' + wantBase + '"]');
+    if (wantBase) {
+      var target = root.querySelector('input[name="calc-base"][value="' + CSS.escape(wantBase) + '"]');
       if (target) target.checked = true;
     }
 
-    // восстановление ранее выбранных модулей
+    // восстановление ранее выбранных модулей (по label из сохранённого конфига)
     var saved = readConfig();
     if (saved && saved.items) {
       saved.items.forEach(function (it) {
-        Object.keys(MODULES).forEach(function (k) {
-          if (MODULES[k].label === it.label) {
-            var inp = root.querySelector('input[name="calc-mod"][value="' + k + '"]');
-            if (inp) inp.checked = true;
-          }
-        });
+        for (var k = 0; k < modInputs.length; k++) {
+          if (modOf(modInputs[k]).label === it.label) modInputs[k].checked = true;
+        }
       });
     }
 
@@ -180,7 +186,7 @@
 
     if (!cfg || !cfg.items || !cfg.items.length) {
       strip.innerHTML = '<strong>Конфигурация не выбрана.</strong> ' +
-        '<a href="' + root.dataset.calcPath + '">Открыть калькулятор</a>';
+        '<a href="' + (root.dataset.calcPath || '/') + '">Открыть калькулятор</a>';
       if (hidden) hidden.value = '';
       return;
     }
@@ -189,7 +195,7 @@
     }).join('');
     strip.innerHTML = '<strong>' + cfg.items.length + ' поз. на сумму ' + fmt(cfg.total) + '</strong>' +
       '<ul>' + lis + '</ul>' +
-      '<a href="' + root.dataset.calcPath + '">Изменить конфигурацию</a>';
+      '<a href="' + (root.dataset.calcPath || '/') + '">Изменить конфигурацию</a>';
     if (hidden) hidden.value = JSON.stringify(cfg);
   }
 
@@ -206,6 +212,29 @@
 
     field.classList.toggle('invalid', !ok);
     return ok;
+  }
+
+  function sendOrder(payload) {
+    // Основной путь — REST темы; при сетевой ошибке REST — admin-ajax.
+    var restUrl = (D.restUrl || '') + '/order';
+    return fetch(restUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-WP-Nonce': D.nonce || '' },
+      body: JSON.stringify(payload)
+    }).then(function (r) {
+      if (!r.ok) throw new Error('REST ' + r.status);
+      return r.json();
+    }).catch(function () {
+      var body = new URLSearchParams();
+      Object.keys(payload).forEach(function (k) { body.append(k, payload[k]); });
+      body.append('action', 'vtk_submit_order');
+      return fetch(D.ajaxUrl, { method: 'POST', credentials: 'same-origin', body: body })
+        .then(function (r) { return r.json(); })
+        .then(function (j) {
+          if (!j || !j.success) throw new Error((j && j.data && j.data.message) || 'Ошибка отправки');
+          return j.data;
+        });
+    });
   }
 
   function initOrderForm(root) {
@@ -246,28 +275,24 @@
         email: form.querySelector('[name="email"]').value.trim(),
         machine: form.querySelector('[name="machine"]').value.trim(),
         config: form.querySelector('[name="config"]').value,
+        consent: form.querySelector('[name="consent"]').checked ? '1' : '',
+        vtk_nonce: (form.querySelector('[name="vtk_nonce"]') || {}).value || D.nonce || '',
         ts: new Date().toISOString()
       };
 
       var submitBtn = form.querySelector('button[type="submit"]');
+      var status = root.querySelector('[data-role="form-status"]') || form.querySelector('.form-note');
       submitBtn.disabled = true;
       submitBtn.textContent = 'Отправляем…';
 
-      // Заглушка API: при открытии с file:// fetch на /api/order недоступен —
-      // считаем отправку успешной и редиректим на /thanks/
-      var thanksUrl = root.dataset.thanksPath;
-      function done() { window.location.href = thanksUrl; }
-
-      fetch('/api/order', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      }).then(function (r) {
-        if (!r.ok) throw new Error('bad status');
-        return r.json().catch(function () { return {}; });
-      }).then(done).catch(function () {
-        // dev-режим (file:// или отсутствие бэкенда): имитируем успех
-        setTimeout(done, 300);
+      sendOrder(payload).then(function (data) {
+        var url = (data && data.redirectTo) || root.dataset.thanksPath || '';
+        if (url) { window.location.href = url; return; }
+        if (status) status.textContent = 'Заявка отправлена.';
+      }).catch(function (err) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Отправить заявку';
+        if (status) status.textContent = 'Не удалось отправить заявку. Позвоните нам или повторите позже.';
       });
     });
   }
@@ -280,10 +305,10 @@
     var orderRoot = document.querySelector('[data-order-root]');
     if (orderRoot) initOrderForm(orderRoot);
 
-    // активная пилюля: резолвим href относительно текущей страницы и сравниваем пути
-    var here = new URL(window.location.href).pathname.replace(/\/index\.html$/, '/');
+    // активная пилюля переключателя аудитории — по совпадению пути ссылки с текущим
+    var here = new URL(window.location.href).pathname.replace(/\/$/, '');
     document.querySelectorAll('.aud-switch a').forEach(function (a) {
-      var target = new URL(a.href, window.location.href).pathname.replace(/\/index\.html$/, '/');
+      var target = new URL(a.href, window.location.href).pathname.replace(/\/$/, '');
       if (target === here) a.classList.add('active');
     });
   });
