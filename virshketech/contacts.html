@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Контакты | VirshkeTech — ТФО-160</title>
+  <meta name="description" content="Контакты VirshkeTech: телефон, e-mail, адрес, Telegram и WhatsApp. Задайте вопрос о токарно-фрезерной оси ТФО-160.">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="assets/style.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- ===== HEADER (единый для всех страниц) ===== -->
+<header class="vt-header navbar navbar-expand-lg bg-white">
+  <div class="container">
+    <a class="navbar-brand me-lg-4" href="index.html" aria-label="VirshkeTech — на главную">
+      <img src="assets/img/logo.svg" alt="Логотип VirshkeTech" width="170" height="44">
+    </a>
+
+    <!-- Переключатель аудитории: пилюли на десктопе -->
+    <div class="vt-aud-switch d-none d-lg-flex align-items-center gap-2 ms-auto me-3">
+      <span class="vt-aud-label me-1">На какой станок?</span>
+      <a href="cnc-pro.html" class="nav-link">У меня стойка Fanuc/Siemens</a>
+      <a href="cnc-lite.html" class="nav-link">У меня Mach3/DDCS</a>
+      <a href="manual.html" class="nav-link">У меня ручной станок</a>
+    </div>
+
+    <div class="d-none d-lg-flex align-items-center gap-3">
+      <a href="tel:+70000000000" class="vt-phone" aria-label="Телефон для связи">
+        <i class="bi bi-telephone-fill me-1" aria-hidden="true"></i>+7 (000) 000-00-00
+      </a>
+      <a href="order.html" class="btn btn-vt-cta btn-sm">Оставить заявку</a>
+    </div>
+
+    <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
+            data-bs-target="#vtMobile" aria-controls="vtMobile" aria-expanded="false"
+            aria-label="Переключить навигацию">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Мобильное меню: переключатель сворачивается в collapse -->
+    <div class="collapse navbar-collapse d-lg-none" id="vtMobile">
+      <nav class="nav flex-column vt-aud-switch w-100 py-3" aria-label="Переключатель аудитории">
+        <a href="cnc-pro.html" class="nav-link mb-2">У меня стойка Fanuc/Siemens</a>
+        <a href="cnc-lite.html" class="nav-link mb-2">У меня Mach3/DDCS</a>
+        <a href="manual.html" class="nav-link mb-2">У меня ручной станок</a>
+        <div class="d-flex flex-column gap-2 mt-2">
+          <a href="tel:+70000000000" class="vt-phone">+7 (000) 000-00-00</a>
+          <a href="order.html" class="btn btn-vt-cta">Оставить заявку</a>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ===== КОНТАКТЫ ===== -->
+  <section class="vt-section py-5">
+    <div class="container">
+      <h1 class="mb-2">Контакты</h1>
+      <p class="text-vt-muted mb-5">Пишите и звоните — подскажем, подходит ли ТФО-160 под ваш станок.</p>
+
+      <div class="row g-4 mb-5">
+        <article class="col-lg-4 col-md-6">
+          <div class="card h-100 shadow-sm vt-contact-card">
+            <div class="card-body p-4 text-center">
+              <i class="bi bi-telephone-fill d-block mb-3" aria-hidden="true"></i>
+              <h2 class="h6">Телефон</h2>
+              <a href="tel:+70000000000" class="fw-semibold link-primary d-block mb-1">+7 (000) 000-00-00</a>
+              <p class="text-vt-muted small mb-0">Пн–Пт, 9:00–18:00 (МСК)</p>
+            </div>
+          </div>
+        </article>
+        <article class="col-lg-4 col-md-6">
+          <div class="card h-100 shadow-sm vt-contact-card">
+            <div class="card-body p-4 text-center">
+              <i class="bi bi-envelope-fill d-block mb-3" aria-hidden="true"></i>
+              <h2 class="h6">E-mail</h2>
+              <a href="mailto:info@virshketech.com" class="fw-semibold link-primary d-block mb-1">info@virshketech.com</a>
+              <p class="text-vt-muted small mb-0">Ответим в течение рабочего дня</p>
+            </div>
+          </div>
+        </article>
+        <article class="col-lg-4 col-md-6">
+          <div class="card h-100 shadow-sm vt-contact-card">
+            <div class="card-body p-4 text-center">
+              <i class="bi bi-geo-alt-fill d-block mb-3" aria-hidden="true"></i>
+              <h2 class="h6">Адрес</h2>
+              <p class="fw-semibold mb-1">г. Москва, ул. Примерная, д. 0</p>
+              <p class="text-vt-muted small mb-0">Производство и шоурум</p>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- Мессенджеры -->
+      <div class="d-flex flex-wrap gap-3 justify-content-center mb-5">
+        <a href="https://t.me/" target="_blank" rel="noopener" class="btn btn-vt-outline btn-lg">
+          <i class="bi bi-telegram me-2" aria-hidden="true"></i>Telegram
+        </a>
+        <a href="https://wa.me/" target="_blank" rel="noopener" class="btn btn-vt-outline btn-lg">
+          <i class="bi bi-whatsapp me-2" aria-hidden="true"></i>WhatsApp
+        </a>
+      </div>
+
+      <!-- Карта-заглушка -->
+      <div class="vt-map-placeholder mb-5" role="img" aria-label="Карта с адресом компании">
+        <span><i class="bi bi-map me-2" aria-hidden="true"></i>Здесь будет карта</span>
+      </div>
+
+      <hr class="mb-5">
+
+      <!-- ===== ФОРМА «ЗАДАТЬ ВОПРОС» ===== -->
+      <div class="row justify-content-center">
+        <div class="col-lg-6">
+          <h2 class="vt-section-title mb-2">Задать вопрос</h2>
+          <p class="text-vt-muted mb-4">Заполните форму — свяжемся в течение рабочего дня.</p>
+
+          <form id="question-form" class="needs-validation card shadow-sm p-4" novalidate>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label for="q-name" class="form-label">Имя <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="q-name" name="name" required autocomplete="name">
+                <div class="invalid-feedback">Укажите имя.</div>
+              </div>
+              <div class="col-md-6">
+                <label for="q-phone" class="form-label">Телефон <span class="text-danger">*</span></label>
+                <input type="tel" class="form-control" id="q-phone" name="phone" required
+                       inputmode="tel" placeholder="+7 (___) ___-__-__" autocomplete="tel">
+                <div class="invalid-feedback">Укажите телефон.</div>
+              </div>
+              <div class="col-12">
+                <label for="q-question" class="form-label">Ваш вопрос <span class="text-danger">*</span></label>
+                <textarea class="form-control" id="q-question" name="question" rows="4" required></textarea>
+                <div class="invalid-feedback">Напишите вопрос.</div>
+              </div>
+            </div>
+            <div class="form-check mt-3">
+              <input class="form-check-input" type="checkbox" id="q-agree" name="agree" required>
+              <label class="form-check-label small" for="q-agree">
+                Согласен на обработку персональных данных <span class="text-danger">*</span>
+              </label>
+              <div class="invalid-feedback">Без согласия мы не сможем ответить.</div>
+            </div>
+            <button type="submit" class="btn btn-vt-cta btn-lg mt-4 w-100">Отправить</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Модальное окно подтверждения отправки -->
+<div class="modal fade" id="thanks-modal" tabindex="-1" aria-labelledby="q-modal-label" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body text-center p-5">
+        <div class="display-6 text-success mb-3"><i class="bi bi-check-circle-fill" aria-hidden="true"></i></div>
+        <h2 id="q-modal-label" class="h4 mb-2">Спасибо, заявка отправлена</h2>
+        <p class="text-vt-muted mb-0">Мы свяжемся с вами в течение рабочего дня.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== FOOTER (единый для всех страниц) ===== -->
+<footer class="vt-footer py-5">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <img src="assets/img/logo-white.svg" alt="Логотип VirshkeTech" width="170" height="44" class="mb-3">
+        <p class="small opacity-75 mb-0">VirshkeTech — разработка и производство токарно-фрезерных осей и модулей автоматизации металлообрабатывающих станков.</p>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <h3 class="h6 text-white mb-3">Навигация</h3>
+        <ul class="list-unstyled small mb-0">
+          <li><a href="index.html">Главная</a></li>
+          <li><a href="cnc-pro.html">Профессиональные ЧПУ</a></li>
+          <li><a href="cnc-lite.html">ЧПУ начального уровня</a></li>
+          <li><a href="manual.html">Ручной станок</a></li>
+          <li><a href="products.html">Продукция</a></li>
+          <li><a href="product-tfo-160.html">ТФО-160</a></li>
+          <li><a href="calculator.html">Калькулятор</a></li>
+          <li><a href="contacts.html">Контакты</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <h3 class="h6 text-white mb-3">Контакты</h3>
+        <ul class="list-unstyled small mb-0">
+          <li><i class="bi bi-telephone me-2" aria-hidden="true"></i><a href="tel:+70000000000">+7 (000) 000-00-00</a></li>
+          <li><i class="bi bi-envelope me-2" aria-hidden="true"></i><a href="mailto:info@virshketech.com">info@virshketech.com</a></li>
+          <li><i class="bi bi-geo-alt me-2" aria-hidden="true"></i>г. Москва, ул. Примерная, д. 0</li>
+          <li>
+            <i class="bi bi-chat me-2" aria-hidden="true"></i>
+            <a href="https://t.me/" target="_blank" rel="noopener">Telegram</a> ·
+            <a href="https://wa.me/" target="_blank" rel="noopener">WhatsApp</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="d-flex flex-wrap justify-content-between align-items-center vt-footer-bottom opacity-75 small">
+      <span>© 2026 VirshkeTech. Все права защищены.</span>
+      <a href="#" class="text-white text-decoration-none">Политика конфиденциальности</a>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="assets/script.js"></script>
+</body>
+</html>
