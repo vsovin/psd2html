@@ -131,6 +131,34 @@ function initCalculator() {
 }
 
 /* ------------------------------------------------------------
+   Маска телефона +7 (___) ___-__-__ для input[name="phone"] внутри scope
+   ------------------------------------------------------------ */
+function bindPhoneMask(scope) {
+  const phone = scope.querySelector('input[name="phone"]');
+  if (!phone) return;
+  const applyMask = (value) => {
+    const digits = value.replace(/\D/g, "").replace(/^7/, "").slice(0, 10);
+    let out = "+7 (";
+    if (digits.length > 0) out += digits.slice(0, 3);
+    if (digits.length >= 3) out += ") ";
+    if (digits.length > 3) out += digits.slice(3, 6);
+    if (digits.length >= 6) out += "-";
+    if (digits.length > 6) out += digits.slice(6, 8);
+    if (digits.length >= 8) out += "-";
+    if (digits.length > 8) out += digits.slice(8, 10);
+    return out;
+  };
+  phone.addEventListener("input", () => {
+    const caretEnd = phone.selectionStart >= phone.value.length;
+    phone.value = applyMask(phone.value);
+    if (caretEnd) phone.setSelectionRange(phone.value.length, phone.value.length);
+  });
+  phone.addEventListener("focus", () => {
+    if (!phone.value || phone.value === "+7 (") phone.value = "+7 (";
+  });
+}
+
+/* ------------------------------------------------------------
    Форма заказа: сводка из localStorage + маска телефона + отправка
    ------------------------------------------------------------ */
 function loadConfig() {
@@ -168,30 +196,7 @@ function initOrder() {
   if (hiddenTotal) hiddenTotal.value = cfg ? String(cfg.total) : "";
 
   /* Маска телефона +7 (___) ___-__-__ */
-  const phone = form.querySelector('input[name="phone"]');
-  if (phone) {
-    const MASK = "+7 (XXX) XXX-XX-XX";
-    const applyMask = (value) => {
-      const digits = value.replace(/\D/g, "").replace(/^7/, "").slice(0, 10);
-      let out = "+7 (";
-      if (digits.length > 0) out += digits.slice(0, 3);
-      if (digits.length >= 3) out += ") ";
-      if (digits.length > 3) out += digits.slice(3, 6);
-      if (digits.length >= 6) out += "-";
-      if (digits.length > 6) out += digits.slice(6, 8);
-      if (digits.length >= 8) out += "-";
-      if (digits.length > 8) out += digits.slice(8, 10);
-      return out;
-    };
-    phone.addEventListener("input", () => {
-      const caretEnd = phone.selectionStart >= phone.value.length;
-      phone.value = applyMask(phone.value);
-      if (caretEnd) phone.setSelectionRange(phone.value.length, phone.value.length);
-    });
-    phone.addEventListener("focus", () => {
-      if (!phone.value || phone.value === "+7 (") phone.value = "+7 (";
-    });
-  }
+  bindPhoneMask(form);
 
   /* Валидация Bootstrap + «отправка» */
   form.addEventListener("submit", (event) => {
@@ -238,6 +243,7 @@ function showThanksModal() {
 function initQuestionForm() {
   const form = document.getElementById("question-form");
   if (!form) return;
+  bindPhoneMask(form);
   form.addEventListener("submit", (event) => {
     event.preventDefault();
     event.stopPropagation();

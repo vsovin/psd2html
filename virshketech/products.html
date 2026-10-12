@@ -66,15 +66,16 @@
 
   <section class="py-4 pb-5">
     <div class="container">
-      <div class="d-flex flex-wrap gap-2 mb-4" role="group" aria-label="Фильтр каталога">
+      <div class="d-flex flex-wrap gap-2 mb-4 vt-chips" role="group" aria-label="Фильтр каталога">
         <button type="button" class="btn btn-sm vt-filter-btn active" data-filter="all">Все</button>
-        <button type="button" class="btn btn-sm vt-filter-btn" data-filter="axis">Оси</button>
-        <button type="button" class="btn btn-sm vt-filter-btn" data-filter="module">Модули автоматизации</button>
+        <button type="button" class="btn btn-sm vt-filter-btn" data-filter="axis">Оси и модули</button>
+        <button type="button" class="btn btn-sm vt-filter-btn" data-filter="automation">Автоматизация</button>
+        <button type="button" class="btn btn-sm vt-filter-btn" data-filter="accessory">Аксессуары</button>
       </div>
 
       <div class="row g-4" id="catalog">
         <article class="col-lg-4 col-md-6" data-cat="axis">
-          <div class="card h-100 vt-route-card">
+          <div class="card h-100 shadow-sm vt-product-card">
             <img src="assets/img/placeholder.svg" class="card-img-top vt-product-img" alt="ТФО-160 — универсальная токарно-фрезерная ось">
             <div class="card-body p-4 d-flex flex-column">
               <h3 class="h6 card-title">ТФО-160 — универсальная токарно-фрезерная ось</h3>
@@ -84,8 +85,8 @@
             </div>
           </div>
         </article>
-        <article class="col-lg-4 col-md-6" data-cat="module">
-          <div class="card h-100 vt-route-card">
+        <article class="col-lg-4 col-md-6" data-cat="automation">
+          <div class="card h-100 shadow-sm vt-product-card">
             <img src="assets/img/placeholder.svg" class="card-img-top vt-product-img" alt="Модуль автоматизации токарного патрона">
             <div class="card-body p-4 d-flex flex-column">
               <h3 class="h6 card-title">Модуль автоматизации токарного патрона</h3>
@@ -95,8 +96,8 @@
             </div>
           </div>
         </article>
-        <article class="col-lg-4 col-md-6" data-cat="module">
-          <div class="card h-100 vt-route-card">
+        <article class="col-lg-4 col-md-6" data-cat="automation">
+          <div class="card h-100 shadow-sm vt-product-card">
             <img src="assets/img/placeholder.svg" class="card-img-top vt-product-img" alt="Автозажим тисков">
             <div class="card-body p-4 d-flex flex-column">
               <h3 class="h6 card-title">Автозажим тисков</h3>
@@ -106,8 +107,8 @@
             </div>
           </div>
         </article>
-        <article class="col-lg-4 col-md-6" data-cat="module">
-          <div class="card h-100 vt-route-card">
+        <article class="col-lg-4 col-md-6" data-cat="automation">
+          <div class="card h-100 shadow-sm vt-product-card">
             <img src="assets/img/placeholder.svg" class="card-img-top vt-product-img" alt="Автоматическая задняя бабка">
             <div class="card-body p-4 d-flex flex-column">
               <h3 class="h6 card-title">Автоматическая задняя бабка</h3>
@@ -117,8 +118,8 @@
             </div>
           </div>
         </article>
-        <article class="col-lg-4 col-md-6" data-cat="module">
-          <div class="card h-100 vt-route-card">
+        <article class="col-lg-4 col-md-6" data-cat="automation">
+          <div class="card h-100 shadow-sm vt-product-card vt-soon position-relative" data-soon="В разработке">
             <img src="assets/img/placeholder.svg" class="card-img-top vt-product-img" alt="Робот для подачи заготовок">
             <div class="card-body p-4 d-flex flex-column">
               <h3 class="h6 card-title">Робот для подачи заготовок</h3>
@@ -128,22 +129,43 @@
             </div>
           </div>
         </article>
+        <article class="col-lg-4 col-md-6" data-cat="accessory">
+          <div class="card h-100 shadow-sm vt-product-card">
+            <img src="assets/img/placeholder.svg" class="card-img-top vt-product-img" alt="Электронная УДГ">
+            <div class="card-body p-4 d-flex flex-column">
+              <h3 class="h6 card-title">Электронная УДГ</h3>
+              <p class="card-text text-vt-muted small">Электронная маховиковая ручка с токарными функциями.</p>
+              <div class="vt-price mt-auto pt-2">Цена по запросу</div>
+              <a href="order.html" class="btn btn-vt-outline w-100 mt-2">Оставить заявку</a>
+            </div>
+          </div>
+        </article>
+        <article class="col-lg-4 col-md-6" data-cat="accessory">
+          <div class="card h-100 shadow-sm vt-product-card">
+            <img src="assets/img/placeholder.svg" class="card-img-top vt-product-img" alt="Электронная зубрёжка">
+            <div class="card-body p-4 d-flex flex-column">
+              <h3 class="h6 card-title">Электронная зубрёжка</h3>
+              <p class="card-text text-vt-muted small">Модуль нарезания зубчатых колёс без зуборезного станка.</p>
+              <div class="vt-price mt-auto pt-2">Цена по запросу</div>
+              <a href="order.html" class="btn btn-vt-outline w-100 mt-2">Оставить заявку</a>
+            </div>
+          </div>
+        </article>
+        <article class="col-lg-4 col-md-6" data-cat="accessory">
+          <div class="card h-100 shadow-sm vt-product-card">
+            <img src="assets/img/placeholder.svg" class="card-img-top vt-product-img" alt="Станок для нарезания резьбы">
+            <div class="card-body p-4 d-flex flex-column">
+              <h3 class="h6 card-title">Станок для нарезания резьбы</h3>
+              <p class="card-text text-vt-muted small">Специализированный пост на базе ТФО-160.</p>
+              <div class="vt-price mt-auto pt-2">Цена по запросу</div>
+              <a href="order.html" class="btn btn-vt-outline w-100 mt-2">Оставить заявку</a>
+            </div>
+          </div>
+        </article>
       </div>
     </div>
   </section>
 
-<!-- Модальное окно «спасибо» перед отправкой -->
-<div class="modal fade" id="thanks-modal" tabindex="-1" aria-hidden="true" aria-labelledby="thanks-modal-label">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-body text-center p-5">
-        <div class="display-4 text-vt-brand mb-2"><i class="bi bi-check-circle-fill" aria-hidden="true"></i></div>
-        <h3 class="h4" id="thanks-modal-label">Заявка отправляется…</h3>
-        <p class="text-vt-muted mb-0">Перенаправляем на страницу подтверждения.</p>
-      </div>
-    </div>
-  </div>
-</div>
 
 
 </main>
