@@ -1,0 +1,505 @@
+/* ============================================================
+   VirshkeTech — кастомные стили поверх Bootstrap 5.3
+   Тема: светлая. Брендовые цвета взяты из логотипа.
+   ============================================================ */
+
+:root {
+  --vt-bg: #ffffff;
+  --vt-bg-soft: #f5f7fa;
+  --vt-card: #ffffff;
+  --vt-text: #1a2233;
+  --vt-muted: #6b7788;
+  --vt-border: #e3e8ef;
+  --vt-brand: #0b3c6b;
+  --vt-brand-dark: #092f55;
+  --vt-accent: #ff6a1a;
+  --vt-success: #2ea043;
+  --vt-radius: 12px;
+  --vt-shadow: 0 2px 8px rgba(11, 60, 107, .06);
+}
+
+body {
+  background: var(--vt-bg);
+  color: var(--vt-text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+h1 {
+  font-size: clamp(30px, 4vw, 48px);
+  letter-spacing: -0.4px;
+  font-weight: 800;
+  color: var(--vt-brand);
+}
+
+h2 {
+  font-size: clamp(24px, 3vw, 36px);
+  font-weight: 700;
+  color: var(--vt-brand);
+}
+
+h3, h4, h5 {
+  color: var(--vt-brand);
+  font-weight: 700;
+}
+
+a {
+  color: var(--vt-brand);
+}
+
+.text-vt-muted { color: var(--vt-muted) !important; }
+.text-vt-brand { color: var(--vt-brand) !important; }
+.text-vt-accent { color: var(--vt-accent) !important; }
+.bg-vt-soft { background: var(--vt-bg-soft); }
+
+/* ---------- Header ---------- */
+
+.vt-header {
+  position: sticky;
+  top: 0;
+  z-index: 1030;
+  background: var(--vt-bg);
+  border-bottom: 1px solid var(--vt-border);
+  transition: box-shadow .2s ease;
+}
+
+.vt-header.vt-scrolled {
+  box-shadow: var(--vt-shadow);
+}
+
+.vt-logo img {
+  height: 44px;
+  width: auto;
+}
+
+/* Переключатель аудитории (пилюли) */
+.vt-aud-switch .nav-link {
+  border-radius: 999px;
+  padding: .35rem .9rem;
+  margin: 0 .15rem;
+  font-size: .875rem;
+  font-weight: 600;
+  color: var(--vt-brand);
+  border: 1px solid var(--vt-border);
+  white-space: nowrap;
+}
+
+.vt-aud-switch .nav-link:hover {
+  border-color: var(--vt-brand);
+  background: var(--vt-bg-soft);
+}
+
+.vt-aud-switch .nav-link.active {
+  background: var(--vt-brand);
+  border-color: var(--vt-brand);
+  color: #fff;
+}
+
+.vt-aud-label {
+  font-size: .82rem;
+  font-weight: 600;
+  color: var(--vt-muted);
+  white-space: nowrap;
+}
+
+/* Изображения карточек (товары, примеры) */
+.vt-product-img {
+  height: 160px;
+  object-fit: contain;
+  background: var(--vt-bg-soft);
+}
+
+.vt-phone {
+  font-weight: 700;
+  color: var(--vt-brand);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.vt-phone:hover { color: var(--vt-brand-dark); }
+
+/* ---------- Кнопки ---------- */
+
+.btn-vt-cta {
+  background: var(--vt-accent);
+  border: none;
+  color: #fff;
+  font-weight: 700;
+  border-radius: var(--vt-radius);
+  padding: .65rem 1.4rem;
+}
+
+.btn-vt-cta:hover,
+.btn-vt-cta:focus {
+  background: #e85f14;
+  color: #fff;
+}
+
+.btn-vt-outline {
+  border: 2px solid var(--vt-brand);
+  color: var(--vt-brand);
+  font-weight: 600;
+  border-radius: var(--vt-radius);
+  padding: .6rem 1.3rem;
+}
+
+.btn-vt-outline:hover,
+.btn-vt-outline:focus {
+  background: var(--vt-brand);
+  color: #fff;
+}
+
+/* ---------- Hero ---------- */
+
+.vt-hero {
+  background: linear-gradient(180deg, #f7fafd 0%, #ffffff 100%);
+  padding: 4rem 0 3rem;
+}
+
+.vt-badge-brand {
+  background: rgba(11, 60, 107, .08);
+  color: var(--vt-brand);
+  font-weight: 700;
+  border-radius: 999px;
+  padding: .45rem 1rem;
+  font-size: .85rem;
+}
+
+.vt-hero-img {
+  width: 100%;
+  max-width: 520px;
+}
+
+/* ---------- Секции ---------- */
+
+.vt-section {
+  padding: 3.5rem 0;
+}
+
+.vt-section-title {
+  margin-bottom: .5rem;
+}
+
+.vt-section-lead {
+  color: var(--vt-muted);
+  margin-bottom: 2rem;
+}
+
+/* ---------- Карточки ---------- */
+
+.card {
+  border: 1px solid var(--vt-border);
+  border-radius: var(--vt-radius);
+  box-shadow: var(--vt-shadow);
+}
+
+.vt-route-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+
+.vt-route-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(11, 60, 107, .12);
+}
+
+.vt-route-card .card-body { flex: 1 1 auto; }
+
+.vt-route-tag {
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .3px;
+  text-transform: uppercase;
+  color: var(--vt-muted);
+}
+
+.vt-price {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--vt-brand);
+}
+
+.vt-check-list {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 0;
+}
+
+.vt-check-list li {
+  padding-left: 1.6rem;
+  position: relative;
+  margin-bottom: .45rem;
+}
+
+.vt-check-list li::before {
+  font-family: "bootstrap-icons";
+  content: "\F26E"; /* bi-check-lg */
+  position: absolute;
+  left: 0;
+  color: var(--vt-success);
+  font-weight: 700;
+}
+
+.vt-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem;
+}
+
+.vt-chip {
+  background: var(--vt-bg-soft);
+  border: 1px solid var(--vt-border);
+  border-radius: 999px;
+  padding: .2rem .7rem;
+  font-size: .82rem;
+  font-weight: 600;
+  color: var(--vt-brand);
+}
+
+/* ---------- Функции (плитки) ---------- */
+
+.vt-feature-tile {
+  background: var(--vt-card);
+  border: 1px solid var(--vt-border);
+  border-radius: var(--vt-radius);
+  box-shadow: var(--vt-shadow);
+  padding: 1.25rem;
+  height: 100%;
+}
+
+.vt-feature-tile i {
+  font-size: 1.6rem;
+  color: var(--vt-accent);
+}
+
+/* ---------- Таблица характеристик ---------- */
+
+.vt-spec-table th {
+  color: var(--vt-muted);
+  font-weight: 600;
+  width: 55%;
+}
+
+.vt-spec-table td {
+  font-weight: 600;
+  color: var(--vt-brand);
+}
+
+.vt-spec-table caption {
+  color: var(--vt-muted);
+  caption-side: bottom;
+  padding-top: .75rem;
+}
+
+/* ---------- CTA-баннер ---------- */
+
+.vt-cta-banner {
+  background: var(--vt-brand);
+  border-radius: var(--vt-radius);
+  color: #fff;
+  padding: 2.5rem;
+}
+
+.vt-cta-banner h2,
+.vt-cta-banner h3 {
+  color: #fff;
+}
+
+/* ---------- Калькулятор ---------- */
+
+.vt-calc-option {
+  cursor: pointer;
+  transition: border-color .15s ease, background .15s ease;
+}
+
+.vt-calc-option:hover {
+  border-color: var(--vt-brand);
+}
+
+.vt-calc-option.selected {
+  border-color: var(--vt-accent);
+  background: #fff8f3;
+}
+
+.vt-calc-sum {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--vt-brand);
+}
+
+.vt-calc-sticky {
+  position: sticky;
+  top: 96px;
+}
+
+.vt-calc-lines .list-group-item {
+  border-color: var(--vt-border);
+}
+
+/* SVG-схема: подсветка выбранных модулей */
+#vt-scheme [data-module] {
+  fill: #cfd8e3;
+  stroke: #9fb0c4;
+  transition: fill .2s ease, stroke .2s ease;
+}
+
+#vt-scheme [data-module].on {
+  fill: var(--vt-accent);
+  stroke: #d1520e;
+}
+
+/* ---------- Каталог ---------- */
+
+.vt-filter-btn {
+  border-radius: 999px;
+  border: 1px solid var(--vt-border);
+  background: #fff;
+  color: var(--vt-brand);
+  font-weight: 600;
+  padding: .35rem 1rem;
+}
+
+.vt-filter-btn.active {
+  background: var(--vt-brand);
+  border-color: var(--vt-brand);
+  color: #fff;
+}
+
+.vt-product-card .card-img-top {
+  background: var(--vt-bg-soft);
+  padding: 1rem;
+}
+
+.vt-soon {
+  position: relative;
+}
+
+.vt-soon::after {
+  content: attr(data-soon);
+  position: absolute;
+  top: .75rem;
+  right: .75rem;
+  background: var(--vt-accent);
+  color: #fff;
+  font-size: .72rem;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: .2rem .6rem;
+}
+
+/* ---------- Хлебные крошки ---------- */
+
+.vt-breadcrumb {
+  font-size: .875rem;
+}
+
+/* ---------- Footer ---------- */
+
+.vt-footer {
+  background: var(--vt-brand);
+  color: rgba(255, 255, 255, .85);
+  padding: 3rem 0 1.5rem;
+}
+
+.vt-footer a {
+  color: rgba(255, 255, 255, .85);
+  text-decoration: none;
+}
+
+.vt-footer a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.vt-footer .logo-invert {
+  height: 48px;
+}
+
+.vt-footer h5 {
+  color: #fff;
+  font-size: 1rem;
+}
+
+.vt-footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, .18);
+  margin-top: 2rem;
+  padding-top: 1.25rem;
+  font-size: .85rem;
+}
+
+/* ---------- Страница «Спасибо» ---------- */
+
+.vt-thanks {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+}
+
+.vt-thanks .logo-page {
+  height: 72px;
+}
+
+/* ---------- Контакты ---------- */
+
+.vt-contact-card i {
+  font-size: 1.8rem;
+  color: var(--vt-accent);
+}
+
+.vt-map-placeholder {
+  background: var(--vt-bg-soft);
+  border: 1px dashed var(--vt-border);
+  border-radius: var(--vt-radius);
+  min-height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--vt-muted);
+}
+
+/* ---------- Формы ---------- */
+
+.form-label {
+  font-weight: 600;
+  color: var(--vt-brand);
+}
+
+.form-control, .form-select {
+  border-radius: 8px;
+  border-color: var(--vt-border);
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: var(--vt-brand);
+  box-shadow: 0 0 0 .25rem rgba(11, 60, 107, .15);
+}
+
+/* ---------- Адаптив ---------- */
+
+@media (max-width: 991.98px) {
+  .vt-aud-switch {
+    width: 100%;
+  }
+
+  .vt-aud-switch .nav-link {
+    display: block;
+    text-align: left;
+    border-radius: 8px;
+    margin: .2rem 0;
+  }
+
+  .vt-hero {
+    padding: 2.5rem 0 2rem;
+  }
+
+  .vt-cta-banner {
+    padding: 1.75rem;
+  }
+
+  .vt-calc-sticky {
+    position: static;
+  }
+}

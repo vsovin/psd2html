@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Калькулятор комплектации ТФО-160 | VirshkeTech</title>
+  <meta name="description" content="Онлайн-калькулятор: выберите базовое решение ТФО-160 и модули автоматизации — сумма посчитается автоматически.">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="assets/style.css" rel="stylesheet">
+</head>
+<body>
+
+<header class="vt-header navbar navbar-expand-lg bg-white">
+  <div class="container">
+    <a class="navbar-brand me-lg-4" href="index.html" aria-label="VirshkeTech — на главную">
+      <img src="assets/img/logo.svg" alt="Логотип VirshkeTech" width="170" height="44">
+    </a>
+
+    <!-- Переключатель аудитории: пилюли на десктопе -->
+    <div class="vt-aud-switch d-none d-lg-flex align-items-center gap-2 ms-auto me-3">
+      <span class="vt-aud-label me-1">На какой станок?</span>
+      <a href="cnc-pro.html" class="nav-link">У меня стойка Fanuc/Siemens</a>
+      <a href="cnc-lite.html" class="nav-link">У меня Mach3/DDCS</a>
+      <a href="manual.html" class="nav-link">У меня ручной станок</a>
+    </div>
+
+    <div class="d-none d-lg-flex align-items-center gap-3">
+      <a href="tel:+70000000000" class="vt-phone" aria-label="Телефон для связи">
+        <i class="bi bi-telephone-fill me-1" aria-hidden="true"></i>+7 (000) 000-00-00
+      </a>
+      <a href="order.html" class="btn btn-vt-cta btn-sm">Оставить заявку</a>
+    </div>
+
+    <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
+            data-bs-target="#vtMobile" aria-controls="vtMobile" aria-expanded="false"
+            aria-label="Переключить навигацию">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Мобильное меню: переключатель сворачивается в collapse -->
+    <div class="collapse navbar-collapse d-lg-none" id="vtMobile">
+      <nav class="nav flex-column vt-aud-switch w-100 py-3" aria-label="Переключатель аудитории">
+        <a href="cnc-pro.html" class="nav-link mb-2">У меня стойка Fanuc/Siemens</a>
+        <a href="cnc-lite.html" class="nav-link mb-2">У меня Mach3/DDCS</a>
+        <a href="manual.html" class="nav-link mb-2">У меня ручной станок</a>
+        <div class="d-flex flex-column gap-2 mt-2">
+          <a href="tel:+70000000000" class="vt-phone">+7 (000) 000-00-00</a>
+          <a href="order.html" class="btn btn-vt-cta">Оставить заявку</a>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+
+
+<main id="main">
+
+
+  <section class="vt-hero py-4">
+    <div class="container">
+      <h1 class="mb-2">Калькулятор комплектации</h1>
+      <p class="lead text-vt-muted mb-0">Выберите ТФО и модули — сумма посчитается автоматически.</p>
+    </div>
+  </section>
+
+  <section class="py-4 pb-5">
+    <div class="container">
+      <form id="calc-form" class="row g-4" novalidate>
+        <div class="col-lg-7">
+
+          <fieldset class="mb-4">
+            <legend class="h5 mb-3">Базовое решение <span class="text-vt-muted small">(обязательно)</span></legend>
+            <div class="row g-3">
+              <div class="col-md-12">
+                <label class="card vt-calc-option p-3">
+                  <input class="form-check-input me-2" type="radio" name="base" value="pro">
+                  <span class="fw-semibold">ТФО-160 для профессиональных ЧПУ</span>
+                  <span class="text-vt-muted small">Fanuc, Siemens, Mazak · блок киоск или импульсные драйверы</span>
+                  <span class="vt-price mt-1">370 000 ₽</span>
+                </label>
+              </div>
+              <div class="col-md-12">
+                <label class="card vt-calc-option p-3 selected">
+                  <input class="form-check-input me-2" type="radio" name="base" value="lite" checked>
+                  <span class="fw-semibold">ТФО-160 для ЧПУ начального уровня</span>
+                  <span class="text-vt-muted small">Mach3, DDCS, LinuxCNC · реле / StepDir / ModBus</span>
+                  <span class="vt-price mt-1">340 000 ₽</span>
+                </label>
+              </div>
+              <div class="col-md-12">
+                <label class="card vt-calc-option p-3">
+                  <input class="form-check-input me-2" type="radio" name="base" value="manual">
+                  <span class="fw-semibold">ТФО-160 для ручного станка</span>
+                  <span class="text-vt-muted small">Без ЧПУ · установка без модернизации станка</span>
+                  <span class="vt-price mt-1">370 000 ₽</span>
+                </label>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend class="h5 mb-3">Модули автоматизации</legend>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="card vt-calc-option p-3 h-100">
+                  <input class="form-check-input me-2" type="checkbox" name="module" value="chuck">
+                  <span class="fw-semibold">Модуль токарного патрона</span>
+                  <span class="vt-price mt-1">120 000 ₽</span>
+                </label>
+              </div>
+              <div class="col-md-6">
+                <label class="card vt-calc-option p-3 h-100">
+                  <input class="form-check-input me-2" type="checkbox" name="module" value="vise">
+                  <span class="fw-semibold">Автозажим тисков</span>
+                  <span class="vt-price mt-1">95 000 ₽</span>
+                </label>
+              </div>
+              <div class="col-md-6">
+                <label class="card vt-calc-option p-3 h-100">
+                  <input class="form-check-input me-2" type="checkbox" name="module" value="tailstock">
+                  <span class="fw-semibold">Автоматическая задняя бабка</span>
+                  <span class="vt-price mt-1">140 000 ₽</span>
+                </label>
+              </div>
+              <div class="col-md-6">
+                <label class="card vt-calc-option p-3 h-100">
+                  <input class="form-check-input me-2" type="checkbox" name="module" value="robot">
+                  <span class="fw-semibold">Робот подачи заготовок <span class="badge text-bg-warning align-middle">в разработке</span></span>
+                  <span class="vt-price mt-1">350 000 ₽</span>
+                </label>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+
+        <div class="col-lg-5">
+          <div class="vt-calc-sum vt-calc-sticky p-4 rounded-4">
+            <h2 class="h5 mb-3">Ваша комплектация</h2>
+            <!-- Inline SVG-схема: подсветка выбранных модулей -->
+            <svg id="vt-scheme" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 300" role="img" aria-label="Схема станка с ТФО-160 и модулями автоматизации" class="w-100 mb-3">
+              <rect x="40" y="220" width="440" height="34" rx="6" fill="#e3e8ef" stroke="#9fb0c4"/>
+              <rect x="70" y="180" width="380" height="44" rx="6" fill="#f5f7fa" stroke="#9fb0c4"/>
+              <circle cx="130" cy="130" r="42" fill="#ffffff" stroke="#0B3C6B" stroke-width="3"/>
+              <circle cx="130" cy="130" r="18" fill="#0B3C6B"/>
+              <g id="m-chuck" data-module="chuck">
+                <path d="M100 108 L118 122 M100 152 L118 138 M160 108 L142 122 M160 152 L142 138" stroke-width="6" stroke-linecap="round"/>
+                <rect x="106" y="100" width="48" height="60" rx="8" fill-opacity="0.25"/>
+              </g>
+              <rect x="175" y="120" width="150" height="20" rx="4" fill="#cfd8e3" stroke="#9fb0c4"/>
+              <rect x="205" y="148" width="90" height="34" rx="6" fill="#0B3C6B"/>
+              <text x="250" y="170" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" fill="#ffffff">ТФО-160</text>
+              <g id="m-tail" data-module="tailstock">
+                <rect x="330" y="106" width="58" height="48" rx="6" fill-opacity="0.25" stroke-width="4"/>
+                <polygon points="330,130 344,122 344,138" stroke-width="3" stroke-linejoin="round"/>
+              </g>
+              <rect x="238" y="40" width="24" height="70" rx="4" fill="#e3e8ef" stroke="#9fb0c4"/>
+              <rect x="222" y="104" width="56" height="22" rx="4" fill="#ffffff" stroke="#0B3C6B" stroke-width="2"/>
+              <g id="m-vise" data-module="vise">
+                <rect x="392" y="188" width="52" height="26" rx="4" fill-opacity="0.25" stroke-width="4"/>
+                <line x1="404" y1="188" x2="404" y2="214" stroke-width="3"/>
+                <line x1="432" y1="188" x2="432" y2="214" stroke-width="3"/>
+              </g>
+              <g id="m-robot" data-module="robot">
+                <rect x="430" y="70" width="44" height="96" rx="8" fill-opacity="0.25" stroke-width="4"/>
+                <circle cx="452" cy="62" r="12" fill-opacity="0.25" stroke-width="4"/>
+              </g>
+              <text x="130" y="205" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="11" fill="#6b7788">патрон</text>
+              <text x="359" y="205" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="11" fill="#6b7788">задняя бабка</text>
+              <text x="452" y="185" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="11" fill="#6b7788">робот</text>
+            </svg>
+            <ul class="list-group list-group-flush vt-calc-lines mb-3" id="calc-lines" aria-live="polite"></ul>
+            <div class="d-flex justify-content-between align-items-center border-top pt-3">
+              <span class="h5 mb-0">Итого:</span>
+              <span class="vt-price" id="calc-total">0 ₽</span>
+            </div>
+            <a href="order.html" id="calc-order-btn" class="btn btn-vt-cta btn-lg w-100 mt-3">Оформить заявку</a>
+            <p class="text-vt-muted small mt-2 mb-0">Цены ориентировочные, итог уточняется после согласования задачи.</p>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+
+
+</main>
+
+<!-- ===== FOOTER (единый для всех страниц) ===== -->
+<footer class="vt-footer py-5">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <img src="assets/img/logo-white.svg" alt="Логотип VirshkeTech" width="170" height="44" class="mb-3">
+        <p class="small opacity-75 mb-0">VirshkeTech — разработка и производство токарно-фрезерных осей и модулей автоматизации металлообрабатывающих станков.</p>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <h3 class="h6 text-white mb-3">Навигация</h3>
+        <ul class="list-unstyled small mb-0">
+          <li><a href="index.html">Главная</a></li>
+          <li><a href="cnc-pro.html">Профессиональные ЧПУ</a></li>
+          <li><a href="cnc-lite.html">ЧПУ начального уровня</a></li>
+          <li><a href="manual.html">Ручной станок</a></li>
+          <li><a href="products.html">Продукция</a></li>
+          <li><a href="product-tfo-160.html">ТФО-160</a></li>
+          <li><a href="calculator.html">Калькулятор</a></li>
+          <li><a href="contacts.html">Контакты</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <h3 class="h6 text-white mb-3">Контакты</h3>
+        <ul class="list-unstyled small mb-0">
+          <li><i class="bi bi-telephone me-2" aria-hidden="true"></i><a href="tel:+70000000000">+7 (000) 000-00-00</a></li>
+          <li><i class="bi bi-envelope me-2" aria-hidden="true"></i><a href="mailto:info@virshketech.com">info@virshketech.com</a></li>
+          <li><i class="bi bi-geo-alt me-2" aria-hidden="true"></i>г. Москва, ул. Примерная, д. 0</li>
+          <li>
+            <i class="bi bi-chat me-2" aria-hidden="true"></i>
+            <a href="https://t.me/" target="_blank" rel="noopener">Telegram</a> ·
+            <a href="https://wa.me/" target="_blank" rel="noopener">WhatsApp</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="d-flex flex-wrap justify-content-between align-items-center vt-footer-bottom opacity-75 small">
+      <span>© 2026 VirshkeTech. Все права защищены.</span>
+      <a href="#" class="text-white text-decoration-none">Политика конфиденциальности</a>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="assets/script.js"></script>
+</body>
+</html>

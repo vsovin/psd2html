@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ТФО-160 — универсальная токарно-фрезерная ось | VirshkeTech</title>
+  <meta name="description" content="Универсальная 4-я ось ТФО-160 для станков с ЧПУ Fanuc, Siemens, Mach3, DDCS и ручных станков. Подойдёт к любому станку. Рассчитайте комплектацию в калькуляторе.">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="assets/style.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- ===== HEADER (единый для всех страниц) ===== -->
+<header class="vt-header navbar navbar-expand-lg bg-white">
+  <div class="container">
+    <a class="navbar-brand me-lg-4" href="index.html" aria-label="VirshkeTech — на главную">
+      <img src="assets/img/logo.svg" alt="Логотип VirshkeTech" width="170" height="44">
+    </a>
+
+    <!-- Переключатель аудитории: пилюли на десктопе -->
+    <div class="vt-aud-switch d-none d-lg-flex align-items-center gap-2 ms-auto me-3">
+      <span class="vt-aud-label me-1">На какой станок?</span>
+      <a href="cnc-pro.html" class="nav-link">У меня стойка Fanuc/Siemens</a>
+      <a href="cnc-lite.html" class="nav-link">У меня Mach3/DDCS</a>
+      <a href="manual.html" class="nav-link">У меня ручной станок</a>
+    </div>
+
+    <div class="d-none d-lg-flex align-items-center gap-3">
+      <a href="tel:+70000000000" class="vt-phone" aria-label="Телефон для связи">
+        <i class="bi bi-telephone-fill me-1" aria-hidden="true"></i>+7 (000) 000-00-00
+      </a>
+      <a href="order.html" class="btn btn-vt-cta btn-sm">Оставить заявку</a>
+    </div>
+
+    <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
+            data-bs-target="#vtMobile" aria-controls="vtMobile" aria-expanded="false"
+            aria-label="Переключить навигацию">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Мобильное меню: переключатель сворачивается в collapse -->
+    <div class="collapse navbar-collapse d-lg-none" id="vtMobile">
+      <nav class="nav flex-column vt-aud-switch w-100 py-3" aria-label="Переключатель аудитории">
+        <a href="cnc-pro.html" class="nav-link mb-2">У меня стойка Fanuc/Siemens</a>
+        <a href="cnc-lite.html" class="nav-link mb-2">У меня Mach3/DDCS</a>
+        <a href="manual.html" class="nav-link mb-2">У меня ручной станок</a>
+        <div class="d-flex flex-column gap-2 mt-2">
+          <a href="tel:+70000000000" class="vt-phone">+7 (000) 000-00-00</a>
+          <a href="order.html" class="btn btn-vt-cta">Оставить заявку</a>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ===== 1. HERO ===== -->
+  <section class="vt-hero py-5">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6">
+          <span class="badge vt-badge-brand rounded-pill mb-3">Универсальная 4-я ось</span>
+          <h1 class="mb-3">ТФО-160 — универсальная токарно-фрезерная ось</h1>
+          <p class="lead text-vt-muted mb-4">Подойдёт к любому станку. На какой станок будем ставить?</p>
+          <div class="d-flex flex-wrap gap-2">
+            <a href="#routes" class="btn btn-vt-cta btn-lg">Подобрать под мой станок</a>
+            <a href="calculator.html" class="btn btn-vt-outline btn-lg">Рассчитать комплектацию</a>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <img src="assets/img/scheme.svg" alt="Схема станка с установленной осью ТФО-160" class="img-fluid">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 2. РАЗВИЛКА: три потока трафика ===== -->
+  <section class="py-5 bg-vt-soft" id="routes">
+    <div class="container">
+      <h2 class="text-center mb-2">На какой станок будем ставить?</h2>
+      <p class="text-center text-vt-muted mb-5">Выберите свой сценарий — покажем доступные функции, способ подключения и стоимость решения.</p>
+      <div class="row g-4">
+
+        <!-- Карточка A: профессиональные ЧПУ -->
+        <article class="col-lg-4 col-md-6">
+          <div class="card h-100 vt-route-card">
+            <div class="card-body p-4">
+              <div class="text-vt-accent fs-2 mb-3"><i class="bi bi-cpu-fill" aria-hidden="true"></i></div>
+              <h3 class="h5">Станок с профессиональной системой ЧПУ</h3>
+              <p class="text-vt-muted small mb-3">Fanuc · Siemens · GSK · Mazak · Okuma · Haas</p>
+              <ul class="list-unstyled vt-check-list mb-3">
+                <li><i class="bi bi-check-circle-fill" aria-hidden="true"></i> Поворот на заданный угол</li>
+                <li><i class="bi bi-check-circle-fill" aria-hidden="true"></i> Нарезание зубчатых колёс</li>
+                <li><i class="bi bi-check-circle-fill" aria-hidden="true"></i> Нарезание резьбы без передачи параметров</li>
+              </ul>
+              <p class="small mb-1"><strong>Подключение:</strong> блок киоск или импульсные драйверы</p>
+              <p class="text-vt-muted small mb-3"><i class="bi bi-info-circle me-1" aria-hidden="true"></i>Функционал ограничен возможностями стойки</p>
+              <div class="vt-price mb-3">370 000 ₽</div>
+              <a href="cnc-pro.html" class="btn btn-vt-cta w-100">Перейти</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Карточка B: ЧПУ начального уровня -->
+        <article class="col-lg-4 col-md-6">
+          <div class="card h-100 vt-route-card">
+            <div class="card-body p-4">
+              <div class="text-vt-accent fs-2 mb-3"><i class="bi bi-display-fill" aria-hidden="true"></i></div>
+              <h3 class="h5">ЧПУ начального уровня</h3>
+              <p class="text-vt-muted small mb-3">DDCS · Mach3 · LinuxCNC · Inctra · Pumotix</p>
+              <ul class="list-unstyled vt-check-list mb-3">
+                <li><i class="bi bi-check-circle-fill" aria-hidden="true"></i> Полный функционал оси</li>
+                <li><i class="bi bi-check-circle-fill" aria-hidden="true"></i> Все циклы: резьба, шестерни, шлицы</li>
+              </ul>
+              <p class="small mb-1"><strong>Подключение:</strong> реле, StepDir, ModBus</p>
+              <p class="text-vt-muted small mb-3"><i class="bi bi-info-circle me-1" aria-hidden="true"></i>Не требует вмешательства в логику стойки</p>
+              <div class="vt-price mb-3">340 000 ₽</div>
+              <a href="cnc-lite.html" class="btn btn-vt-cta w-100">Перейти</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Карточка C: ручной станок -->
+        <article class="col-lg-4 col-md-6 mx-md-auto">
+          <div class="card h-100 vt-route-card">
+            <div class="card-body p-4">
+              <div class="text-vt-accent fs-2 mb-3"><i class="bi bi-hand-index-thumb-fill" aria-hidden="true"></i></div>
+              <h3 class="h5">Ручной станок</h3>
+              <p class="text-vt-muted small mb-3">Без ЧПУ — работает как делительная головка нового поколения</p>
+              <ul class="list-unstyled vt-check-list mb-3">
+                <li><i class="bi bi-check-circle-fill" aria-hidden="true"></i> Полный функционал с ручным управлением</li>
+                <li><i class="bi bi-check-circle-fill" aria-hidden="true"></i> При установке моторов — автоматические циклы</li>
+              </ul>
+              <p class="small mb-1"><strong>Подключение:</strong> просто установил и работай</p>
+              <p class="text-vt-muted small mb-3"><i class="bi bi-info-circle me-1" aria-hidden="true"></i>Подходит без модернизации станка</p>
+              <div class="vt-price mb-3">370 000 ₽</div>
+              <a href="manual.html" class="btn btn-vt-cta w-100">Перейти</a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 3. ХАРАКТЕРИСТИКИ ТФО-160 ===== -->
+  <section class="py-5">
+    <div class="container">
+      <h2 class="mb-4">Основные технические характеристики ТФО-160</h2>
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="table-responsive vt-spec-table">
+            <table class="table align-middle mb-0">
+              <caption class="visually-hidden">Технические характеристики ТФО-160</caption>
+              <tbody>
+                <tr><th scope="row">Тип</th><td>Универсальная четвёртая токарно-фрезерная ось</td></tr>
+                <tr><th scope="row">Диаметр обработки</th><td>уточняется</td></tr>
+                <tr><th scope="row">Расстояние между центрами</th><td>уточняется</td></tr>
+                <tr><th scope="row">Точность позиционирования</th><td>уточняется</td></tr>
+                <tr><th scope="row">Привод</th><td>уточняется</td></tr>
+                <tr><th scope="row">Интерфейсы подключения</th><td>StepDir, ModBus, реле, импульсные драйверы ЧПУ</td></tr>
+                <tr><th scope="row">Совместимость со станками</th><td>Любые токарные и фрезерные станки</td></tr>
+                <tr><th scope="row">Габариты / масса</th><td>уточняется</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="text-vt-muted small mt-3"><i class="bi bi-exclamation-triangle me-1" aria-hidden="true"></i>Значения «уточняется» будут заменены на реальные данные по паспорту изделия.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 4. АВТОМАТИЗАЦИЯ ===== -->
+  <section class="py-5 bg-vt-soft">
+    <div class="container">
+      <h2 class="mb-2">«Хочу, чтобы поменьше работы руками»</h2>
+      <p class="text-vt-muted mb-5">Дополнительные модули автоматизации — устанавливаются на ТФО-160 и ваш станок.</p>
+      <div class="row g-4">
+        <article class="col-lg-3 col-md-6">
+          <div class="card h-100">
+            <div class="card-body p-4">
+              <img src="assets/img/placeholder.svg" alt="Модуль автоматизации токарного патрона" class="card-img-top vt-product-img">
+              <h3 class="h6">Модуль автоматизации токарного патрона</h3>
+              <p class="text-vt-muted small mb-3">Зажим заготовки без участия оператора</p>
+              <div class="fw-bold text-vt-brand">120 000 ₽</div>
+            </div>
+          </div>
+        </article>
+        <article class="col-lg-3 col-md-6">
+          <div class="card h-100">
+            <div class="card-body p-4">
+              <img src="assets/img/placeholder.svg" alt="Автозажим тисков" class="card-img-top vt-product-img">
+              <h3 class="h6">Автозажим тисков</h3>
+              <p class="text-vt-muted small mb-3">Повторяемый силовой зажим детали</p>
+              <div class="fw-bold text-vt-brand">95 000 ₽</div>
+            </div>
+          </div>
+        </article>
+        <article class="col-lg-3 col-md-6">
+          <div class="card h-100">
+            <div class="card-body p-4">
+              <img src="assets/img/placeholder.svg" alt="Автоматическая задняя бабка" class="card-img-top vt-product-img">
+              <h3 class="h6">Автоматическая задняя бабка</h3>
+              <p class="text-vt-muted small mb-3">Выдвижение центра по программе</p>
+              <div class="fw-bold text-vt-brand">140 000 ₽</div>
+            </div>
+          </div>
+        </article>
+        <article class="col-lg-3 col-md-6">
+          <div class="card h-100">
+            <div class="card-body p-4">
+              <img src="assets/img/placeholder.svg" alt="Робот для подачи заготовок" class="card-img-top vt-product-img">
+              <h3 class="h6">Робот для подачи заготовок <span class="badge text-bg-warning align-middle">в разработке</span></h3>
+              <p class="text-vt-muted small mb-3">Автоматическая загрузка из бункера</p>
+              <div class="fw-bold text-vt-brand">350 000 ₽</div>
+            </div>
+          </div>
+        </article>
+      </div>
+      <div class="alert alert-info mt-4" role="alert">
+        <i class="bi bi-lightbulb-fill me-1" aria-hidden="true"></i>
+        Хотите полноценной автоматизации? Поставьте приводы на оси X и Z — и получите нарезание резьбы, зубчатых колёс, проточку, расточку и шлицевые пазы в автоматическом режиме.
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 5. ТИЗЕР КАЛЬКУЛЯТОРА ===== -->
+  <section class="py-5">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6 order-lg-2">
+          <img src="assets/img/scheme.svg" alt="Схема станка с подсветкой выбранных модулей автоматизации" class="img-fluid">
+        </div>
+        <div class="col-lg-6 order-lg-1">
+          <h2 class="mb-3">Калькулятор комплектации</h2>
+          <p class="lead text-vt-muted mb-4">Выберите ТФО и модули — сумма посчитается автоматически.</p>
+          <a href="calculator.html" class="btn btn-vt-cta btn-lg">Открыть калькулятор</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 6. ПРИМЕРЫ ПОДКЛЮЧЕНИЯ ===== -->
+  <section class="py-5 bg-vt-soft">
+    <div class="container">
+      <h2 class="mb-5">Примеры подключения</h2>
+      <div class="row g-4">
+        <article class="col-lg-4 col-md-6">
+          <div class="card h-100">
+            <img src="assets/img/placeholder.svg" class="card-img-top vt-product-img" alt="Зуборезный станок с осью ТФО-160">
+            <div class="card-body">
+              <h3 class="h6 card-title">Зуборезный станок</h3>
+              <p class="card-text text-vt-muted small">Нарезание зубчатых колёс модульной обработкой без специальной стойки.</p>
+            </div>
+          </div>
+        </article>
+        <article class="col-lg-4 col-md-6">
+          <div class="card h-100">
+            <img src="assets/img/placeholder.svg" class="card-img-top vt-product-img" alt="Станок для нарезания резьбы с осью ТФО-160">
+            <div class="card-body">
+              <h3 class="h6 card-title">Станок для нарезания резьбы</h3>
+              <p class="card-text text-vt-muted small">Синхронизация вращения и подачи — резьба без передачи параметров стойке.</p>
+            </div>
+          </div>
+        </article>
+        <article class="col-lg-4 col-md-6 mx-md-auto">
+          <div class="card h-100">
+            <img src="assets/img/placeholder.svg" class="card-img-top vt-product-img" alt="Токарный станок с ЧПУ и осью ТФО-160">
+            <div class="card-body">
+              <h3 class="h6 card-title">Токарный станок с ЧПУ</h3>
+              <p class="card-text text-vt-muted small">4-я ось как штатная координата: поворот, индексация, осевая обработка.</p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 7. CTA-БАННЕР ===== -->
+  <section class="py-5">
+    <div class="container">
+      <div class="vt-cta-banner rounded-4 p-5 text-center text-white">
+        <h2 class="text-white mb-2">Не нашли нужное? Соберём под ваш станок</h2>
+        <p class="opacity-75 mb-4">Опишите задачу — предложим решение под вашу модель станка и стойку ЧПУ.</p>
+        <a href="order.html" class="btn btn-light btn-lg fw-bold text-vt-brand">Оставить заявку</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ===== FOOTER (единый для всех страниц) ===== -->
+<footer class="vt-footer py-5">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <img src="assets/img/logo-white.svg" alt="Логотип VirshkeTech" width="170" height="44" class="mb-3">
+        <p class="small opacity-75 mb-0">VirshkeTech — разработка и производство токарно-фрезерных осей и модулей автоматизации металлообрабатывающих станков.</p>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <h3 class="h6 text-white mb-3">Навигация</h3>
+        <ul class="list-unstyled small mb-0">
+          <li><a href="index.html">Главная</a></li>
+          <li><a href="cnc-pro.html">Профессиональные ЧПУ</a></li>
+          <li><a href="cnc-lite.html">ЧПУ начального уровня</a></li>
+          <li><a href="manual.html">Ручной станок</a></li>
+          <li><a href="products.html">Продукция</a></li>
+          <li><a href="product-tfo-160.html">ТФО-160</a></li>
+          <li><a href="calculator.html">Калькулятор</a></li>
+          <li><a href="contacts.html">Контакты</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <h3 class="h6 text-white mb-3">Контакты</h3>
+        <ul class="list-unstyled small mb-0">
+          <li><i class="bi bi-telephone me-2" aria-hidden="true"></i><a href="tel:+70000000000">+7 (000) 000-00-00</a></li>
+          <li><i class="bi bi-envelope me-2" aria-hidden="true"></i><a href="mailto:info@virshketech.com">info@virshketech.com</a></li>
+          <li><i class="bi bi-geo-alt me-2" aria-hidden="true"></i>г. Москва, ул. Примерная, д. 0</li>
+          <li>
+            <i class="bi bi-chat me-2" aria-hidden="true"></i>
+            <a href="https://t.me/" target="_blank" rel="noopener">Telegram</a> ·
+            <a href="https://wa.me/" target="_blank" rel="noopener">WhatsApp</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="d-flex flex-wrap justify-content-between align-items-center vt-footer-bottom opacity-75 small">
+      <span>© 2026 VirshkeTech. Все права защищены.</span>
+      <a href="#" class="text-white text-decoration-none">Политика конфиденциальности</a>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="assets/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Универсальная заглушка изображения изделия.
+  ЗАМЕНИТЬ на реальные фото продукции.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260" role="img" aria-label="Изображение будет добавлено">
+  <rect width="400" height="260" fill="#f5f7fa"/>
+  <rect x="1" y="1" width="398" height="258" fill="none" stroke="#e3e8ef" stroke-dasharray="8 6"/>
+  <circle cx="200" cy="105" r="34" fill="none" stroke="#9fb0c4" stroke-width="4"/>
+  <path d="M186 105h28M200 91v28" stroke="#9fb0c4" stroke-width="4" stroke-linecap="round"/>
+  <text x="200" y="175" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#6b7788">Фото изделия</text>
+  <text x="200" y="197" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#9fb0c4">placeholder — заменить на реальное фото</text>
+</svg>

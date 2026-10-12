@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  SVG-схема станка с ТФО-160 (условная, стилизованная).
+  data-module-атрибуты используются script.js для подсветки
+  выбранных модулей оранжевым в калькуляторе.
+-->
+<svg id="vt-scheme" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 300" role="img" aria-label="Схема станка с токарно-фрезерной осью ТФО-160 и модулями автоматизации">
+  <!-- Станина -->
+  <rect x="40" y="220" width="440" height="34" rx="6" fill="#e3e8ef" stroke="#9fb0c4"/>
+  <rect x="70" y="180" width="380" height="44" rx="6" fill="#f5f7fa" stroke="#9fb0c4"/>
+
+  <!-- Шпиндель / токарный патрон -->
+  <circle cx="130" cy="130" r="42" fill="#ffffff" stroke="#0B3C6B" stroke-width="3"/>
+  <circle cx="130" cy="130" r="18" fill="#0B3C6B"/>
+  <g id="m-chuck" data-module="chuck">
+    <path d="M100 108 L118 122 M100 152 L118 138 M160 108 L142 122 M160 152 L142 138" stroke-width="6" stroke-linecap="round"/>
+    <rect x="106" y="100" width="48" height="60" rx="8" fill-opacity="0.25"/>
+  </g>
+
+  <!-- Заготовка -->
+  <rect x="175" y="120" width="150" height="20" rx="4" fill="#cfd8e3" stroke="#9fb0c4"/>
+
+  <!-- ТФО-160 (4-я ось) под заготовкой -->
+  <g>
+    <rect x="205" y="148" width="90" height="34" rx="6" fill="#0B3C6B"/>
+    <text x="250" y="170" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" fill="#ffffff">ТФО-160</text>
+  </g>
+
+  <!-- Задняя бабка -->
+  <g id="m-tail" data-module="tailstock">
+    <rect x="330" y="106" width="58" height="48" rx="6" fill-opacity="0.25" stroke-width="4"/>
+    <polygon points="330,130 344,122 344,138" stroke-width="3" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Фрезерная головка / суппорт -->
+  <rect x="238" y="40" width="24" height="70" rx="4" fill="#e3e8ef" stroke="#9fb0c4"/>
+  <rect x="222" y="104" width="56" height="22" rx="4" fill="#ffffff" stroke="#0B3C6B" stroke-width="2"/>
+
+  <!-- Тиски на столе -->
+  <g id="m-vise" data-module="vise">
+    <rect x="392" y="188" width="52" height="26" rx="4" fill-opacity="0.25" stroke-width="4"/>
+    <line x1="404" y1="188" x2="404" y2="214" stroke-width="3"/>
+    <line x1="432" y1="188" x2="432" y2="214" stroke-width="3"/>
+  </g>
+
+  <!-- Робот подачи заготовок -->
+  <g id="m-robot" data-module="robot">
+    <rect x="430" y="70" width="44" height="96" rx="8" fill-opacity="0.25" stroke-width="4"/>
+    <circle cx="452" cy="62" r="12" fill-opacity="0.25" stroke-width="4"/>
+  </g>
+
+  <!-- Подписи -->
+  <text x="130" y="205" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="11" fill="#6b7788">патрон</text>
+  <text x="359" y="205" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="11" fill="#6b7788">задняя бабка</text>
+  <text x="452" y="185" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="11" fill="#6b7788">робот</text>
+</svg>
