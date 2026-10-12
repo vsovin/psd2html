@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Каталог изделий — VirshkeTech</title>
+<meta name="description" content="ТФО-160 и модули автоматизации станков: патрон, тиски, задняя бабка, робот подачи, электронная УДГ, зубрёжка, резьбонарезной станок.">
+<link rel="icon" href="/assets/img/placeholder.svg">
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body data-page="products">
+
+<a class="skip-link" href="#main">Перейти к содержимому</a>
+
+<!-- HEADER: одинаковый на всех страницах сайта -->
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="/" aria-label="VirshkeTech — на главную">
+      <span class="logo-mark" aria-hidden="true">VT</span>
+      <span class="logo-text" data-bind="site.company">VirshkeTech</span>
+    </a>
+    <nav class="main-nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/">Главная</a>
+      <a href="/products.html" aria-current="page">Изделия</a>
+      <a href="/product-tfo-160.html">ТФО-160</a>
+      <a href="/calculator.html">Калькулятор</a>
+      <a href="/order.html">Заявка</a>
+      <a href="/contacts.html">Контакты</a>
+    </nav>
+    <div class="header-actions">
+      <a class="header-phone" href="#" data-bind-href="tel:site.phoneRaw" data-bind="site.phone">+7 (000) 000-00-00</a>
+      <button class="burger" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Открыть меню">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="page-head">
+    <div class="container">
+      <p class="eyebrow">Каталог</p>
+      <h1 data-bind="pages.products.title">Каталог изделий</h1>
+      <p class="lead" data-bind="pages.products.subtitle">Оснастка и модули автоматизации. Фильтр по типу оборудования.</p>
+      <p class="section-text" data-bind="pages.products.intro">В каталоге — флагманская четвёртая ось ТФО-160 и модули автоматизации.</p>
+    </div>
+  </section>
+
+  <!-- ФИЛЬТР + ПЛИТКА (рендерятся из data.json: filters / products) -->
+  <section class="section section-tight">
+    <div class="container">
+      <div class="chip-row" id="catalog-filters" role="group" aria-label="Фильтр каталога по категории">
+        <!-- кнопки-чипы создаются script.js -->
+      </div>
+      <div class="grid grid-3 products-grid" id="catalog-grid" aria-live="polite">
+        <!-- карточки изделий создаются script.js -->
+      </div>
+      <noscript><p class="empty-note">Для отображения каталога с фильтром нужен включённый JavaScript. Основные страницы доступны и без него.</p></noscript>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section section-cta">
+    <div class="container cta-inner">
+      <div>
+        <h2 data-bind="pages.products.ctaTitle">Не нашли нужную конфигурацию?</h2>
+        <p data-bind="pages.products.ctaText">Соберите комплектацию в калькуляторе или опишите задачу в заявке.</p>
+      </div>
+      <div class="cta-buttons">
+        <a class="btn btn-primary btn-lg" href="/calculator.html" data-bind="pages.products.ctaButtonText">Собрать комплектацию</a>
+        <a class="btn btn-ghost btn-lg" href="/order.html" data-bind="pages.products.ctaSecondaryText">Задать вопрос</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER: одинаковый на всех страницах сайта -->
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-col">
+      <a class="logo" href="/"><span class="logo-mark" aria-hidden="true">VT</span><span class="logo-text" data-bind="site.company">VirshkeTech</span></a>
+      <p class="footer-about" data-bind="site.tagline">Оснастка и модули автоматизации для токарных и фрезерных станков.</p>
+    </div>
+    <nav class="footer-col" aria-label="Разделы сайта">
+      <a href="/products.html">Изделия</a>
+      <a href="/product-tfo-160.html">ТФО-160</a>
+      <a href="/calculator.html">Калькулятор</a>
+      <a href="/order.html">Заявка</a>
+      <a href="/contacts.html">Контакты</a>
+    </nav>
+    <div class="footer-col footer-contacts">
+      <a href="#" data-bind-href="tel:site.phoneRaw" data-bind="site.phone">+7 (000) 000-00-00</a>
+      <a href="#" data-bind-href="mailto:site.email" data-bind="site.email">info@virshketech.com</a>
+      <p data-bind="site.address">Адрес производства</p>
+      <p data-bind="site.workHours">Пн–Пт 09:00–18:00</p>
+      <p class="footer-social">
+        <a href="#" data-bind-href="site.social.telegram" target="_blank" rel="noopener noreferrer">Telegram</a>
+        <a href="#" data-bind-href="site.social.whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+      </p>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span data-bind="site.footerNote">© VirshkeTech</span>
+    <span data-bind="site.inn">[ИНН/ОГРН]</span>
+    <a href="/admin.html" class="footer-admin" aria-label="Мини-CMS для редактирования контента">CMS</a>
+  </div>
+</footer>
+
+<script src="/assets/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+# VirshkeTech — настройки Apache для виртуального хостинга (public_html/)
+
+Options -Indexes
+
+# /api/... -> api/index.php с сохранением пути в PATH_INFO
+RewriteEngine On
+RewriteBase /
+
+# Служебные файлы наружу не отдаём
+RewriteRule ^(data\.json(\.bak|\.tmp|\.lock)?|\.env|php/|.*\.md$) - [F,L]
+
+# Все запросы /api/<путь> идут в единый обработчик
+RewriteRule ^api/([a-zA-Z0-9/_\-\.]*)$ api/index.php/$1 [QSA,L]
+RewriteRule ^api/?$ api/index.php [QSA,L]
+
+# Разрешаем передачу заголовка Authorization (CGI/FastCGI вырезают его)
+RewriteCond %{HTTP:Authorization} .
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+# Чистые URL: /calculator -> calculator.html (существующие файлы не трогаем)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([a-zA-Z0-9\-]+)/?$ $1.html [L]
+
+# HTML не кэшируем — правки мини-CMS видны после перезагрузки страницы
+<FilesMatch "\.html$">
+  Header set Cache-Control "no-cache"
+</FilesMatch>
+
+# 404 -> главная
+ErrorDocument 404 /index.html

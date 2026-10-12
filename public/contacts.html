@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-bind="pages.contacts.title">Контакты — VirshkeTech</title>
+<meta name="description" content="Контакты VirshkeTech: телефон, e-mail, адрес производства, Telegram и WhatsApp.">
+<link rel="icon" href="/assets/img/placeholder.svg">
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body data-page="contacts">
+
+<a class="skip-link" href="#main">Перейти к содержимому</a>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="/" aria-label="VirshkeTech — на главную">
+      <span class="logo-mark" aria-hidden="true">VT</span>
+      <span class="logo-text" data-bind="site.company">VirshkeTech</span>
+    </a>
+    <nav class="main-nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/">Главная</a>
+      <a href="/products.html">Изделия</a>
+      <a href="/product-tfo-160.html">ТФО-160</a>
+      <a href="/calculator.html">Калькулятор</a>
+      <a href="/order.html">Заявка</a>
+      <a href="/contacts.html" aria-current="page">Контакты</a>
+    </nav>
+    <div class="header-actions">
+      <a class="header-phone" href="#" data-bind-href="tel:site.phoneRaw" data-bind="site.phone">+7 (000) 000-00-00</a>
+      <button class="burger" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Открыть меню">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="page-head">
+    <div class="container">
+      <p class="eyebrow" data-bind="site.tagline">Оснастка и модули автоматизации для станков</p>
+      <h1 data-bind="pages.contacts.title">Контакты</h1>
+      <p class="lead" data-bind="pages.contacts.subtitle">Пишите и звоните — отвечаем в рабочее время.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container grid grid-3">
+
+      <article class="info-card">
+        <h2 class="info-title">Связаться напрямую</h2>
+        <dl class="info-list">
+          <dt>Телефон</dt>
+          <dd><a href="#" data-bind-href="tel:site.phoneRaw" data-bind="site.phone">+7 (000) 000-00-00</a></dd>
+          <dt>E-mail</dt>
+          <dd><a href="#" data-bind-href="mailto:site.email" data-bind="site.email">info@virshketech.com</a></dd>
+          <dt>Адрес производства</dt>
+          <dd data-bind="site.address">[АДРЕС]</dd>
+          <dt>График работы</dt>
+          <dd data-bind="site.workHours">Пн–Пт 09:00–18:00</dd>
+        </dl>
+      </article>
+
+      <article class="info-card">
+        <h2 class="info-title" data-bind="pages.contacts.socialTitle">Мессенджеры</h2>
+        <p class="info-text">Быстрее всего — написать в мессенджер: приложите фото узла или паспорта станка.</p>
+        <div class="btn-row">
+          <a class="btn btn-ghost" href="#" data-bind-href="site.social.telegram" target="_blank" rel="noopener noreferrer">Telegram</a>
+          <a class="btn btn-ghost" href="#" data-bind-href="site.social.whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+        </div>
+        <p class="field-note" data-bind="pages.contacts.mapNote">[КАРТА] блок с картой появится после согласования адреса.</p>
+      </article>
+
+      <article class="info-card">
+        <h2 class="info-title" data-bind="pages.contacts.formTitle">Оставить заявку</h2>
+        <p class="info-text" data-bind="pages.contacts.formText">Заполните форму — рассчитаем комплектацию и свяжемся с вами.</p>
+        <a class="btn btn-primary btn-block" href="/order.html" data-bind="pages.contacts.formButtonText">Перейти к форме заявки</a>
+        <a class="btn btn-ghost btn-block" href="/calculator.html">Собрать комплектацию в калькуляторе</a>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="section-title" data-bind="pages.contacts.requisitesTitle">Реквизиты</h2>
+      <div class="requisites" id="requisites-list"><!-- pages.contacts.requisites --></div>
+      <p class="content-offline" hidden>Данные недоступны: сервер не отвечает. Позвоните нам по телефону в шапке.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-col">
+      <a class="logo" href="/"><span class="logo-mark" aria-hidden="true">VT</span><span class="logo-text" data-bind="site.company">VirshkeTech</span></a>
+      <p class="footer-about" data-bind="site.tagline">Оснастка и модули автоматизации для токарных и фрезерных станков.</p>
+    </div>
+    <nav class="footer-col" aria-label="Разделы сайта">
+      <a href="/products.html">Изделия</a>
+      <a href="/product-tfo-160.html">ТФО-160</a>
+      <a href="/calculator.html">Калькулятор</a>
+      <a href="/order.html">Заявка</a>
+      <a href="/contacts.html">Контакты</a>
+    </nav>
+    <div class="footer-col footer-contacts">
+      <a href="#" data-bind-href="tel:site.phoneRaw" data-bind="site.phone">+7 (000) 000-00-00</a>
+      <a href="#" data-bind-href="mailto:site.email" data-bind="site.email">info@virshketech.com</a>
+      <p data-bind="site.address">Адрес производства</p>
+      <p data-bind="site.workHours">Пн–Пт 09:00–18:00</p>
+      <p class="footer-social">
+        <a href="#" data-bind-href="site.social.telegram" target="_blank" rel="noopener noreferrer">Telegram</a>
+        <a href="#" data-bind-href="site.social.whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+      </p>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span data-bind="site.footerNote">© VirshkeTech</span>
+    <span data-bind="site.inn">[ИНН/ОГРН]</span>
+    <a href="/admin.html" class="footer-admin" aria-label="Мини-CMS для редактирования контента">CMS</a>
+  </div>
+</footer>
+
+<script src="/assets/script.js"></script>
+</body>
+</html>

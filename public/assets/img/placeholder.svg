@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600" role="img" aria-label="Изображение-заглушка">
+  <rect width="800" height="600" fill="#1b1f26"/>
+  <rect x="0.5" y="0.5" width="799" height="599" fill="none" stroke="#2c333d" stroke-width="1"/>
+  <g fill="none" stroke="#ff6a1a" stroke-width="4" opacity="0.75">
+    <circle cx="400" cy="285" r="110"/>
+    <circle cx="400" cy="285" r="46"/>
+    <path d="M400 135v-40M400 435v40M250 285h-40M550 285h40"/>
+    <path d="M322 207l-28-28M478 363l28 28M478 207l28-28M322 363l-28 28"/>
+  </g>
+  <text x="400" y="500" font-family="Arial, Helvetica, sans-serif" font-size="26" fill="#6b7683" text-anchor="middle">ФОТО ИЗДЕЛИЯ — ЗАГЛУШКА</text>
+  <text x="400" y="540" font-family="Arial, Helvetica, sans-serif" font-size="20" fill="#4c5561" text-anchor="middle">Замените URL в админке: Изделия → image</text>
+</svg>

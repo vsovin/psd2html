@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ТФО-160 — токарно-фрезерная четвёртая ось — VirshkeTech</title>
+<meta name="description" content="ТФО-160: универсальная токарно-фрезерная четвёртая ось для профессиональных ЧПУ, ЧПУ начального уровня и ручных станков. Характеристики, совместимость, комплектация.">
+<link rel="icon" href="/assets/img/placeholder.svg">
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body data-page="tfo160" data-product="tfo160">
+
+<a class="skip-link" href="#main">Перейти к содержимому</a>
+
+<!-- HEADER: одинаковый на всех страницах сайта -->
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="/" aria-label="VirshkeTech — на главную">
+      <span class="logo-mark" aria-hidden="true">VT</span>
+      <span class="logo-text" data-bind="site.company">VirshkeTech</span>
+    </a>
+    <nav class="main-nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/">Главная</a>
+      <a href="/products.html">Изделия</a>
+      <a href="/product-tfo-160.html" aria-current="page">ТФО-160</a>
+      <a href="/calculator.html">Калькулятор</a>
+      <a href="/order.html">Заявка</a>
+      <a href="/contacts.html">Контакты</a>
+    </nav>
+    <div class="header-actions">
+      <a class="header-phone" href="#" data-bind-href="tel:site.phoneRaw" data-bind="site.phone">+7 (000) 000-00-00</a>
+      <button class="burger" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Открыть меню">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ШАПКА ИЗДЕЛИЯ -->
+  <section class="product-hero">
+    <div class="container product-hero-inner">
+      <div class="product-hero-text">
+        <p class="badge" data-bind="pages.tfo160.badge">Флагманский продукт</p>
+        <h1 data-bind="pages.tfo160.title">ТФО-160 — универсальная токарно-фрезерная четвёртая ось</h1>
+        <p class="lead" data-bind="pages.tfo160.lead">Четвёртая координата на станке, который изначально её не имел.</p>
+        <p class="product-price-lg"><span class="price-caption">Цена от</span> <strong data-bind="pages.tfo160.priceFrom">340 000 ₽</strong></p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="/calculator.html?add=chuck" data-bind="pages.tfo160.ctaCalcText">Собрать комплектацию</a>
+          <a class="btn btn-ghost" href="/order.html?product=tfo160" data-bind="pages.tfo160.ctaOrderText">Оставить заявку</a>
+        </div>
+      </div>
+      <figure class="hero-media">
+        <img data-bind-src="pages.tfo160.image" src="/assets/img/placeholder.svg" alt="ТФО-160 — четвёртая ось" data-bind-alt="pages.tfo160.title">
+      </figure>
+    </div>
+  </section>
+
+  <!-- СОВМЕСТИМОСТЬ: три категории станков -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title" data-bind="pages.tfo160.compatTitle">С чем работает ТФО-160</h2>
+      <p class="section-text" data-bind="pages.tfo160.compatSubtitle">Исполнение подбирается по типу стойки: от прямого подключения к оси ЧПУ до ручного деления.</p>
+      <div class="grid grid-3" id="compat-list"><!-- карточки категорий из pages.tfo160.compatibility --></div>
+    </div>
+  </section>
+
+  <!-- ХАРАКТЕРИСТИКИ + ВОЗМОЖНОСТИ -->
+  <section class="section section-alt">
+    <div class="container two-col">
+      <div>
+        <h2 class="section-title" data-bind="pages.tfo160.specsTitle">Технические характеристики</h2>
+        <table class="specs-table">
+          <caption class="visually-hidden">Характеристики ТФО-160</caption>
+          <tbody id="specs-table"><!-- строки label/value из pages.tfo160.specs --></tbody>
+        </table>
+        <p class="hint-note" data-bind="pages.tfo160.specsNote">Значения в квадратных скобках — плейсхолдеры до утверждения чертежа.</p>
+      </div>
+      <div>
+        <h2 class="section-title" data-bind="pages.tfo160.featuresTitle">Возможности</h2>
+        <ul class="check-list" id="features-list"><!-- пункты из pages.tfo160.features --></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- МОДУЛИ КОМПЛЕКТАЦИИ -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title" data-bind="pages.tfo160.modulesTitle">Модули в комплектацию</h2>
+      <p class="section-text" data-bind="pages.tfo160.modulesSubtitle">Любой модуль добавляется к ТФО-160 на этапе заказа или позже — без переделки узла.</p>
+      <div class="grid grid-4 products-grid" id="home-products"><!-- featured-изделия из products --></div>
+      <p class="inline-links">
+        <a class="link-arrow" href="/calculator.html">Калькулятор комплектации →</a>
+        <a class="link-arrow" href="/products.html">Все изделия →</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- ДОКУМЕНТАЦИЯ -->
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="section-title" data-bind="pages.tfo160.docsTitle">Документация и файлы</h2>
+      <div class="doc-row" id="docs-list"><!-- ссылки на PDF/DWG из pages.tfo160.docs --></div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title" data-bind="pages.tfo160.faqTitle">Частые вопросы</h2>
+      <div class="faq-list" id="faq-list"><!-- details/summary из pages.tfo160.faq --></div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section section-cta">
+    <div class="container cta-inner">
+      <div>
+        <h2 data-bind="pages.home.ctaTitle">Нужна консультация технолога?</h2>
+        <p data-bind="pages.home.ctaText">Опишите задачу и модель станка — предложим комплектацию и срок.</p>
+      </div>
+      <a class="btn btn-primary btn-lg" href="/order.html?product=tfo160" data-bind="pages.home.ctaButtonText">Оставить заявку</a>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER: одинаковый на всех страницах сайта -->
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-col">
+      <a class="logo" href="/"><span class="logo-mark" aria-hidden="true">VT</span><span class="logo-text" data-bind="site.company">VirshkeTech</span></a>
+      <p class="footer-about" data-bind="site.tagline">Оснастка и модули автоматизации для токарных и фрезерных станков.</p>
+    </div>
+    <nav class="footer-col" aria-label="Разделы сайта">
+      <a href="/products.html">Изделия</a>
+      <a href="/product-tfo-160.html">ТФО-160</a>
+      <a href="/calculator.html">Калькулятор</a>
+      <a href="/order.html">Заявка</a>
+      <a href="/contacts.html">Контакты</a>
+    </nav>
+    <div class="footer-col footer-contacts">
+      <a href="#" data-bind-href="tel:site.phoneRaw" data-bind="site.phone">+7 (000) 000-00-00</a>
+      <a href="#" data-bind-href="mailto:site.email" data-bind="site.email">info@virshketech.com</a>
+      <p data-bind="site.address">Адрес производства</p>
+      <p data-bind="site.workHours">Пн–Пт 09:00–18:00</p>
+      <p class="footer-social">
+        <a href="#" data-bind-href="site.social.telegram" target="_blank" rel="noopener noreferrer">Telegram</a>
+        <a href="#" data-bind-href="site.social.whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+      </p>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span data-bind="site.footerNote">© VirshkeTech</span>
+    <span data-bind="site.inn">[ИНН/ОГРН]</span>
+    <a href="/admin.html" class="footer-admin" aria-label="Мини-CMS для редактирования контента">CMS</a>
+  </div>
+</footer>
+
+<script src="/assets/script.js"></script>
+</body>
+</html>

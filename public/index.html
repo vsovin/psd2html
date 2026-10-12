@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-bind="site.company">VirshkeTech — оснастка и модули автоматизации станков</title>
+<meta name="description" content="ТФО-160 — универсальная токарно-фрезерная четвёртая ось. Модули автоматизации для ЧПУ и ручных станков.">
+<link rel="icon" href="/assets/img/placeholder.svg">
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body data-page="home">
+
+<a class="skip-link" href="#main">Перейти к содержимому</a>
+
+<!-- HEADER: одинаковый на всех страницах сайта -->
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="/" aria-label="VirshkeTech — на главную">
+      <span class="logo-mark" aria-hidden="true">VT</span>
+      <span class="logo-text" data-bind="site.company">VirshkeTech</span>
+    </a>
+    <nav class="main-nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/">Главная</a>
+      <a href="/products.html">Изделия</a>
+      <a href="/product-tfo-160.html">ТФО-160</a>
+      <a href="/calculator.html">Калькулятор</a>
+      <a href="/order.html">Заявка</a>
+      <a href="/contacts.html">Контакты</a>
+    </nav>
+    <div class="header-actions">
+      <a class="header-phone" href="#" data-bind-href="tel:site.phoneRaw" data-bind="site.phone">+7 (000) 000-00-00</a>
+      <button class="burger" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Открыть меню">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <div class="hero-content">
+        <p class="eyebrow" data-bind="site.tagline">Оснастка и модули автоматизации для станков</p>
+        <h1 data-bind="pages.home.heroTitle">Оснастка и модули автоматизации для станков</h1>
+        <p class="lead" data-bind="pages.home.heroSubtitle">ТФО-160 и модули автоматизации для ЧПУ и ручных станков.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="/calculator.html" data-bind-href="pages.home.heroCtaLink" data-bind="pages.home.heroCtaText">Собрать комплектацию</a>
+          <a class="btn btn-ghost" href="/products.html">Смотреть изделия</a>
+        </div>
+      </div>
+      <figure class="hero-media">
+        <img data-bind-src="pages.home.heroImage" src="/assets/img/placeholder.svg" alt="Токарно-фрезерная четвёртая ось ТФО-160">
+      </figure>
+    </div>
+  </section>
+
+  <!-- ADVANTAGES -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title" data-bind="pages.home.sectionAdvantagesTitle">Почему VirshkeTech</h2>
+      <div class="grid grid-4" id="advantages-grid"><!-- карточки из pages.home.advantages --></div>
+    </div>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title" data-bind="pages.home.sectionProductsTitle">Изделия</h2>
+          <p class="section-text" data-bind="pages.home.sectionProductsText">Флагман и модули автоматизации.</p>
+        </div>
+        <a class="link-arrow" href="/products.html">Весь каталог →</a>
+      </div>
+      <div class="grid grid-4 products-grid" id="home-products"><!-- featured-карточки из products --></div>
+    </div>
+  </section>
+
+  <!-- CALCULATOR TEASER -->
+  <section class="section">
+    <div class="container calc-teaser">
+      <div class="calc-teaser-body">
+        <h2 class="section-title" data-bind="calculator.title">Калькулятор комплектации ТФО-160</h2>
+        <p class="section-text" data-bind="calculator.subtitle">Шаг 1 — база подключения. Шаг 2 — модули автоматизации.</p>
+        <ul class="teaser-list" id="teaser-options"><!-- превью баз и модулей с ценами --></ul>
+        <a class="btn btn-primary" href="/calculator.html">Открыть калькулятор</a>
+      </div>
+      <div class="calc-teaser-card" aria-hidden="true">
+        <span class="demo-label">Пример: база «Профессиональные ЧПУ» + патрон</span>
+        <span class="demo-total" id="teaser-demo-total">— ₽</span>
+        <span class="demo-note">пересчёт в реальном времени</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section section-cta">
+    <div class="container cta-inner">
+      <div>
+        <h2 data-bind="pages.home.ctaTitle">Нужна консультация технолога?</h2>
+        <p data-bind="pages.home.ctaText">Опишите задачу и модель станка.</p>
+      </div>
+      <a class="btn btn-primary btn-lg" href="/order.html" data-bind="pages.home.ctaButtonText">Оставить заявку</a>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER: одинаковый на всех страницах сайта -->
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-col">
+      <a class="logo" href="/"><span class="logo-mark" aria-hidden="true">VT</span><span class="logo-text" data-bind="site.company">VirshkeTech</span></a>
+      <p class="footer-about" data-bind="site.tagline">Оснастка и модули автоматизации для токарных и фрезерных станков.</p>
+    </div>
+    <nav class="footer-col" aria-label="Разделы сайта">
+      <a href="/products.html">Изделия</a>
+      <a href="/product-tfo-160.html">ТФО-160</a>
+      <a href="/calculator.html">Калькулятор</a>
+      <a href="/order.html">Заявка</a>
+      <a href="/contacts.html">Контакты</a>
+    </nav>
+    <div class="footer-col footer-contacts">
+      <a href="#" data-bind-href="tel:site.phoneRaw" data-bind="site.phone">+7 (000) 000-00-00</a>
+      <a href="#" data-bind-href="mailto:site.email" data-bind="site.email">info@virshketech.com</a>
+      <p data-bind="site.address">Адрес производства</p>
+      <p data-bind="site.workHours">Пн–Пт 09:00–18:00</p>
+      <p class="footer-social">
+        <a href="#" data-bind-href="site.social.telegram" target="_blank" rel="noopener noreferrer">Telegram</a>
+        <a href="#" data-bind-href="site.social.whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+      </p>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span data-bind="site.footerNote">© VirshkeTech</span>
+    <span data-bind="site.inn">[ИНН/ОГРН]</span>
+    <a href="/admin.html" class="footer-admin" aria-label="Мини-CMS для редактирования контента">CMS</a>
+  </div>
+</footer>
+
+<script src="/assets/script.js"></script>
+</body>
+</html>
