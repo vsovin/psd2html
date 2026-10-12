@@ -1,0 +1,3 @@
+VirshkeTech site: http://localhost:3000
+Админка: http://localhost:3000/admin.html
+SMTP: не настроен (заявки пишутся только в data.json)

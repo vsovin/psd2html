@@ -1,8 +1,3 @@
-# Dependencies
-node_modules/
-
-# Logs and temp files
-*.log
-
-# Runtime data backups
-data.json.bak
+# Data and session files
+data.json.lock
+php/data/sessions/
