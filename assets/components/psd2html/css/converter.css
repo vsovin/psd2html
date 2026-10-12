@@ -1,0 +1,57 @@
+/**
+ * PSD2HTML — стили виджета конвертера (Задача 2).
+ * Подключается на главной; критический фрагмент дублируется inline в <head> (см. чанк meta.tpl).
+ */
+
+/* Зона drag-n-drop */
+.psd-drop {
+  border: 2px dashed var(--bs-primary, #0d6efd);
+  border-radius: .75rem;
+  background: rgba(13, 110, 253, .04);
+  padding: 2.5rem 1rem;
+  text-align: center;
+  cursor: pointer;
+  transition: background .15s ease, border-color .15s ease, transform .1s ease;
+}
+.psd-drop:hover { background: rgba(13, 110, 253, .08); }
+.psd-drop.is-dragover {
+  border-color: var(--bs-success, #198754);
+  background: rgba(25, 135, 84, .08);
+  transform: scale(1.01);
+}
+.psd-drop.is-disabled { opacity: .55; pointer-events: none; }
+.psd-drop__icon { font-size: 2.5rem; line-height: 1; }
+.psd-drop__hint { color: var(--bs-secondary, #6c757d); font-size: .875rem; }
+
+/* Прогресс */
+.psd-progress { display: none; }
+.psd-progress.is-active { display: block; }
+.psd-status-badge { min-width: 8.5rem; }
+
+/* Блок результата */
+.psd-result { display: none; }
+.psd-result.is-active { display: block; }
+.psd-result__preview {
+  max-width: 100%;
+  border: 1px solid var(--bs-border-color, #dee2e6);
+  border-radius: .5rem;
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .08);
+}
+
+/* Слот CTA Этап 2 (пока заглушка) */
+.cta-manual {
+  border-left: 4px solid var(--bs-warning, #ffc107);
+  background: rgba(255, 193, 7, .06);
+  border-radius: .5rem;
+  padding: 1rem 1.25rem;
+}
+.cta-manual.is-hidden { display: none !important; }
+
+/* Анимация «обработка» */
+@keyframes psd-pulse { 0%,100% { opacity: 1 } 50% { opacity: .45 } }
+.psd-processing-anim { animation: psd-pulse 1.4s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .psd-processing-anim { animation: none; }
+  .psd-drop { transition: none; }
+}
